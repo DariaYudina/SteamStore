@@ -13,6 +13,7 @@ body {
     font-size: 15px;
     line-height: 1.4;
     font-family: Play,Arial,sans-serif;
+     overflow-x: hidden;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -78,12 +79,12 @@ button:focus {
 }
 .wrapper2 a {
     text-decoration: none;
-    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
     white-space: nowrap;
     height: 100%;
+    color: black;
 }
 
 .menu-wrapper {
@@ -93,10 +94,16 @@ button:focus {
 }
 .menu-wrapper a {
     margin-right: 25px;
+    color: black;
 }
 .icon {
+    background-color: white;
     object-fit: cover;
     width: 100%;
+    background-image: linear-gradient(to left, transparent, transparent 50%, #ff4148 50%, #ff793a);
+    background-position: 100% 0;
+    background-size: 200% 100%;
+    transition: all .10s ease-in;
 }
 
 .logo {
@@ -119,8 +126,7 @@ button:focus {
 }
 
 .icon:hover {
-    background: linear-gradient(90deg,#ff4148 0,#ff793a);
-    transition: 0.5s;
+    background-position: 0 0;
 }
 
 .icon.border {
@@ -161,7 +167,6 @@ td {
 .main .wrapper2 {
     justify-content: center;
     align-self: flex-start;
-    padding: 20px 0px 40px 0px;
 }
 
 .footer-column {
@@ -288,14 +293,14 @@ footer .wrapper2 {
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 750px;
+    width: 80%;
+    margin: 20px 0px;
 }
-
 
 .catalog-item {
     background-color: white;
     flex: 1 0 auto;
-    width: 800px !important;
+    width: 100%;
     padding: 17px 20px;
     margin-bottom: 3px;
 }
@@ -371,7 +376,8 @@ footer .wrapper2 {
 .game-sort {
     display: flex;
     flex: 1 0 auto;
-    width: 800px;
+    justify-content: flex-start;
+    width: 100%;
     margin-bottom: 3px;
     color: hsla(0,0%,8%,.6);
     line-height: 1.42857143;
@@ -447,10 +453,11 @@ footer .wrapper2 {
     border-radius: 5px;
     color: white;
 }
-.wrapper-content{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+.wrapper-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 .authheader {
     color: #e06060;
@@ -462,7 +469,7 @@ footer .wrapper2 {
     background-color: inherit;
 }
 input[type="file"] {
-    display: none;
+  display:none;
 }
 
 .custom-file-upload {
@@ -473,15 +480,284 @@ input[type="file"] {
     background-color:inherit;
     color: grey;
 }
-.buyGameButton {
-    color: white;
-    padding: 6px 12px;
-    background-color: grey;
-    border: 0 none;
-    cursor: pointer;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+/*Game profile*/
+.gameprofile-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    margin-top: -460px;
 }
+
+.background-image {
+    width: 100vw;
+    height: 500px;
+    background-image: url(images/background.jpg);
+    background-repeat: no-repeat;
+    filter: brightness(0.6);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.gameProfileItem {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.gameprofile-left {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 35%;
+    margin-right: 30px;
+}
+
+.gameprofile-right {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+}
+
+.gameprofile-right-item {
+    background-color: white;
+    margin-bottom: 20px;
+    padding: 40px 43px;
+    font-size: 14px;
+    color: #111;
+    padding: 40px 43px;
+    font-weight: 400;
+}
+
+.blocktitle {
+    font-family: Play,Arial,sans-serif;
+    font-weight: 700;
+    color: #0d0d0d;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.profileimage {
+    overflow: hidden;
+    width: 100%;
+}
+
+.profileimage img {
+    object-fit: cover;
+    max-width: 100%;
+    width: 100%;
+    min-width: 370px;
+    min-height: 470px;
+}
+
+.profileimage img:hover {
+    transform: scale(1.02);
+    transition: 0.5s;
+}
+
+.gameprofiletextcontainer {
+    display: flex;
+    flex-direction: column;
+    background-color: #3b3b3b;
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+}
+
+    .gameprofiletextcontainer p {
+        margin-bottom: 20px;
+    }
+
+.gameprofiletext {
+    display: flex;
+    border-bottom: 1px solid #5a5a5a;
+}
+
+.gamegenrekey {
+    margin-right: 10px;
+    color: #8b8b8b;
+    text-align: right;
+    width: 50%;
+}
+
+.gamegenrevalue {
+    color: white;
+    width: 50%;
+}
+
+.gametitle {
+    font-family: Play,Arial,sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.gamerating {
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.comment {
+    display: flex;
+    justify-content: space-between;
+}
+
+.out {
+    font-weight: bold;
+}
+
+.gameitemcontainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.infocard {
+    background-color: rgba(0,0,0,.5);
+    color: #cbcbcb;
+    padding: 27px 25px;
+    margin-right: 20px;
+}
+
+.infocard .key {
+    list-style: none;
+    background: url(images/3-1.svg) no-repeat 0 0px;
+    background-size: 20px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+
+.infocard .checkmark {
+    list-style: none;
+    background: url(images/1-1.svg) no-repeat 0 0px;
+    background-size: 20px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+
+.infocard .letter {
+    list-style: none;
+    background: url(images/2-2.svg) no-repeat 0 0px;
+    background-size: 20px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+
+.infocard .procent {
+    list-style: none;
+    background: url(images/4-4.svg) no-repeat 0 0px;
+    background-size: 20px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+
+.shopcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttoncontainer {
+    display: flex;
+    justify-content: center;
+}
+
+.buttoncontainer a {
+    color: white;
+}
+
+.buy {
+    background-color: #0094e9;
+    padding: 20px 80px;
+    font-family: Play,Arial,sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    background-image: linear-gradient(to left, transparent, transparent 50%, #ff4148 50%, #ff793a);
+    background-position: 100% 0;
+    background-size: 200% 100%;
+    transition: all .25s ease-in;
+}
+
+.buy:hover {
+    background-position: 0 0;
+}
+
+.basket {
+    background-color: rgba(0,0,0,.5);
+    border: none;
+    width: 80px;
+    height: 80px;
+}
+
+.basket:hover svg {
+    transform: scale(1.3);
+}
+
+.price {
+    font-family: Play,Arial,sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.rub {
+    font-size: 20px;
+}
+/*Game profile*/
+/* main page */
+.main-background-image {
+    width: 100vw;
+    height: 400px;
+    background-image: url(images/mainbackground1.png);
+    background-repeat: no-repeat;
+    filter: brightness(0.6);
+    background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+}
+
+.catalog-container a {
+    color: black;
+}
+.catalog-container.main{
+    width: 50%;
+}
+.backposition {
+    position: relative;
+}
+.shoptitle {
+    font-family: Play,Arial,sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff4148,#ff793a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.discount {
+    margin-left: 20px;
+    width: 40%;
+}
+/* main page */
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;

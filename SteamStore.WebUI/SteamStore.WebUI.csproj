@@ -120,6 +120,11 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\1-1.svg" />
+    <Content Include="Content\images\2-2.svg" />
+    <Content Include="Content\images\3-1.svg" />
+    <Content Include="Content\images\4-4.svg" />
+    <Content Include="Content\images\background.jpg" />
     <Content Include="Content\images\favicon.ico" />
     <Content Include="Content\images\1.jpg" />
     <Content Include="Content\images\1.svg" />
@@ -129,6 +134,7 @@
     <Content Include="Content\images\game-category.png" />
     <Content Include="Content\images\gamecategory.png" />
     <Content Include="Content\images\logoOrange.png" />
+    <Content Include="Content\images\mainbackground1.png" />
     <Content Include="Content\images\rub.png" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />

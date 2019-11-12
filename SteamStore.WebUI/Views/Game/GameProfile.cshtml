@@ -4,7 +4,81 @@
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Game profile";
 }
-<h2 class="authheader">Купить игру</h2>
-<p>@Model.Name</p>
+<div class="background-image"></div>
+<div class="gameprofile-container">
+    <h1 class="gametitle">@Model.Name</h1>
+    <div class="gameProfileItem">
+        <div class="gameprofile-left">
+            <div class="profileimage">
+                <a href="#">
+                   @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
+                    + @Model.Image + "\" />")
+                </a>
+            </div>
+            <div class="gameprofiletextcontainer">
+                <div class="gameprofiletext">
+                    <div class="gamegenrekey">
+                        <p>Жанр</p>
+                        <p>Издатель</p>
+                    </div>
+                    <div class="gamegenrevalue">
+                        <p>@Model.Category</p>
+                        <p>@Model.Producer</p>
+                    </div>
+                </div>
+                <div class="gamerating">
+                    <p>Рейтинг</p>
+                </div>
+            </div>
+        </div>
+        <div class="gameprofile-right">
+            <div class="gameitemcontainer">
+                <div class="infocard">
+                    <ul>
+                        <li class="checkmark">Наличие: много</li>
+                        <li class="key">Лицензионный ключ активации в Social Club</li>
+                        <li class="letter">Моментальная доставка на e-mail</li>
+                        <li class="procent">Накопительная скидка до 10%</li>
+                    </ul>
+                </div>
+                <div class="shopcontainer">
+                    <div class="price">@Model.Price <span class="rub">руб.</span></div>
+                    <div class="buttoncontainer">
+                        @Html.ActionLink("Купить", "BuyGame", "Game", new { @id = Model.GameId }, new { @class = "buy" })
+                        <a href="#" class="basket">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="31" height="20" viewBox="0 0 37.438 26.646">
+                                <path fill="none" stroke="white" stroke-width="2"
+                                      stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                      d="M20.854 5.182h14.584l-6.105 11.959h-14.5L7.167.963H1">
+                                </path>
+                                <circle fill="none" stroke="white" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                        cx="17.188" cy="23.682" r="2"></circle>
+                                <circle fill="none" stroke="white"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-miterlimit="10" cx="26.313" cy="23.682" r="2"></circle>
+                            </svg>
 
-@Html.ActionLink("Buy", "BuyGame", "Game", new { @id = Model.GameId }, new { @class = "buyGameButton"})
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="gameprofile-right-item">
+                <p class="blocktitle">Описание</p>
+                <p>@Model.Description</p>
+            </div>
+            <div class="gameprofile-right-item">
+                <p class="blocktitle">Минимальные системные требования</p>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique, libero ullam, ut esse recusandae fugiat reprehenderit ea saepe officia doloremque sequi at rerum eos sit, dolore dolorum eveniet blanditiis necessitatibus!</p>
+            </div>
+            <div class="gameprofile-right-item">
+                <div class="comment">
+                    <p class="blocktitle">Комментарии</p>
+                    <p class="out">Выйти</p>
+                </div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora sunt, cum rem tempore autem assumenda commodi voluptate laudantium? Inventore hic reprehenderit modi rem, quis omnis voluptatem doloribus nulla repudiandae reiciendis.</p>
+            </div>
+        </div>
+    </div>
+</div>

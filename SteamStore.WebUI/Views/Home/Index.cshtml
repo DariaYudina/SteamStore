@@ -4,7 +4,7 @@
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "STEAMGAMES";
 }
-@if (User.Identity.IsAuthenticated &&  @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
+@if (User.Identity.IsAuthenticated && @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
 {
     <div class="signupcontainer">
         @foreach (var p in @Model)
@@ -18,3 +18,99 @@
         }
     </div>
 }
+<div class="backposition">
+    <div class="main-background-image"></div>
+    <p class="shoptitle">
+        STEAMGAMES
+    </p>
+</div>
+
+<div class="main-container main">
+    <div class="catalog-container main">
+        <h3>Игры</h3>
+        <div class="game-sort main">
+            <div class="game-sort-item">Новинки</div>
+            <div class="game-sort-item">Ожидаемые</div>
+        </div>
+        <a href="#" class="catalog-item main">
+            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
+            <div class="catalog-name">
+                <span>The Outer Worlds</span>
+                <div class="catalog-category">
+                    <img src="image/rpg.png" alt="">
+                    <span>RPG</span>
+                </div>
+            </div>
+            <div class="catalog-price"><span>1000</span><img src="image/rub.png" alt="rub"></div>
+        </a>
+        <a href="#" class="catalog-item main">
+            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
+            <div class="catalog-name">
+                <span>Moons of Madness</span>
+                <div class="catalog-category">
+                    <img src="image/rpg.png" alt="">
+                    <span>Приключения</span>
+                </div>
+            </div>
+            <div class="catalog-price"><span>1589</span><img src="image/rub.png" alt="rub"></div>
+        </a>
+        <a href="#" class="catalog-item main">
+            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
+            <div class="catalog-name">
+                <span>The Outer Worlds</span>
+                <div class="catalog-category">
+                    <img src="image/rpg.png" alt="">
+                    <span>RPG</span>
+                </div>
+            </div>
+            <div class="catalog-price"><span>1000</span><img src="image/rub.png" alt="rub"></div>
+        </a>
+    </div>
+    <div class="catalog-container main discount">
+        <h3>Скидки</h3>
+        <a href="#" class="catalog-item main">
+            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
+            <div class="catalog-name">
+                <span>The Outer Worlds</span>
+                <div class="catalog-category">
+                    <img src="image/rpg.png" alt="">
+                    <span>RPG</span>
+                </div>
+            </div>
+            <div class="catalog-price"><span>1000</span><img src="image/rub.png" alt="rub"></div>
+        </a>
+        <a href="#" class="catalog-item main">
+            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
+            <div class="catalog-name">
+                <span>The Outer Worlds</span>
+                <div class="catalog-category">
+                    <img src="image/rpg.png" alt="">
+                    <span>RPG</span>
+                </div>
+            </div>
+            <div class="catalog-price"><span>1000</span><img src="image/rub.png" alt="rub"></div>
+        </a>
+        <a href="#" class="catalog-item main">
+            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
+            <div class="catalog-name">
+                <span>The Outer Worlds</span>
+                <div class="catalog-category">
+                    <img src="image/rpg.png" alt="">
+                    <span>RPG</span>
+                </div>
+            </div>
+            <div class="catalog-price"><span>1000</span><img src="image/rub.png" alt="rub"></div>
+        </a>
+        <a href="#" class="catalog-item main">
+            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
+            <div class="catalog-name">
+                <span>The Outer Worlds</span>
+                <div class="catalog-category">
+                    <img src="image/rpg.png" alt="">
+                    <span>RPG</span>
+                </div>
+            </div>
+            <div class="catalog-price"><span>1000</span><img src="image/rub.png" alt="rub"></div>
+        </a>
+    </div>
+</div>
