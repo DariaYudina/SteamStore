@@ -1,0 +1,31 @@
+﻿@model SteamStore.WebUI.Models.AddGameModel
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Add Game";
+}
+@if (User.Identity.IsAuthenticated && @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
+{
+    <h2 class="authheader">Добавление игры</h2>
+    using (Html.BeginForm("AddGame", "Game", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "addgameform" }))
+    {
+
+        @Html.TextBox("Name", "", new { @placeholder = "Введите название", @class = "forminput" })
+        <div class="editor-field">
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        @Html.TextBox("Category", "", new { @placeholder = "Введите жанр игры", @class = "forminput" })
+
+
+        @Html.TextBox("Producer", "", new { @placeholder = "Введите производителя игры", @class = "forminput" })
+
+
+        @Html.TextBoxFor(m => m.Price, new { @type = "number", @min = "0", @placeholder = "Введите цену", @class = "forminput" })
+
+        <textarea id="txtInput" name="Description" class="addgametextarea" placeholder="Введите описание игры..."></textarea>
+        <label for="file-upload" class="custom-file-upload">
+            <i class="fa fa-cloud-upload"></i> Загрузите обложку
+        </label>
+        @Html.TextBoxFor(i => i.Image, new { @type = "file", @class = "forminput" })
+        <p><input type="submit" value="Add Game" class="addgamebutton" /></p>
+    }
+}

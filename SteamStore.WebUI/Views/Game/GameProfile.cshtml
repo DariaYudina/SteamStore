@@ -1,0 +1,10 @@
+﻿@using Entities;
+@model Game
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Game profile";
+}
+<h2 class="authheader">Купить игру</h2>
+<p>@Model.Name</p>
+
+@Html.ActionLink("Buy", "BuyGame", "Game", new { @id = Model.GameId }, new { @class = "buyGameButton"})

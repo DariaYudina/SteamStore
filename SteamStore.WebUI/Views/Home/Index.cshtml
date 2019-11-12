@@ -1,0 +1,20 @@
+﻿@using Entities;
+@model IEnumerable<User>
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "STEAMGAMES";
+}
+@if (User.Identity.IsAuthenticated &&  @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
+{
+    <div class="signupcontainer">
+        @foreach (var p in @Model)
+        {
+            <div>
+                <h3>@p.Login </h3>
+                <h5>@p.Email</h5>
+                @Html.Raw("<img class='userimg' src=\"data:image/jpeg;base64,"
+                        + p.Avatar + "\" />")
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,34 @@
+﻿@using Entities;
+@model IEnumerable<Game>
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Catalog";
+}
+    <div class="catalog-container">
+        <h2>Игры</h2>
+        <div class="game-sort">
+            <div class="game-sort-item">Новинки</div>
+            <div class="game-sort-item">Ожидаемые</div>
+        </div>
+        @foreach (var p in @Model)
+        {
+            <a href="@Url.Action("GameProfile","Game", new { id = p.GameId})" class="catalog-item">
+                <div class="catalog-img">
+                    @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
+                    + p.Image + "\" />")
+                </div>
+                <div class="catalog-name">
+                    <span class="game-title">@p.Name</span>
+                    <div class="catalog-category">
+                        <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
+                        <p>@p.Category</p>
+                    </div>
+                </div>
+                <div class="catalog-price"><span>@p.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+            </a>
+        }
+        @if (User.Identity.IsAuthenticated && @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
+        {
+            <div class="addlinkbutton"> @Html.ActionLink("Добавить игру", "AddGame", "Game", null, new { @class = "addgamelink" })</div>
+        }
+</div>
