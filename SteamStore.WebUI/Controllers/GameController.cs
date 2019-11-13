@@ -65,11 +65,6 @@ namespace SteamStore.WebUI.Controllers
             }
             return View(_gameLogic.GetGame(id));
         }
-        [HttpGet]
-        public ActionResult BuyGame(int id)
-        {
-            return View(_gameLogic.GetGame(id));
-        }
 
     }
 }

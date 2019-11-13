@@ -44,7 +44,7 @@
                 <div class="shopcontainer">
                     <div class="price">@Model.Price <span class="rub">руб.</span></div>
                     <div class="buttoncontainer">
-                        @Html.ActionLink("Купить", "BuyGame", "Game", new { @id = Model.GameId }, new { @class = "buy" })
+                        @Html.ActionLink("Купить", "OrderForm", "Order", new { @id = Model.GameId }, new { @class = "buy" })
                         <a href="#" class="basket">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="31" height="20" viewBox="0 0 37.438 26.646">
@@ -71,6 +71,7 @@
             <div class="gameprofile-right-item">
                 <p class="blocktitle">Минимальные системные требования</p>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique, libero ullam, ut esse recusandae fugiat reprehenderit ea saepe officia doloremque sequi at rerum eos sit, dolore dolorum eveniet blanditiis necessitatibus!</p>
+                
             </div>
             <div class="gameprofile-right-item">
                 <div class="comment">

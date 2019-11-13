@@ -1,0 +1,30 @@
+﻿@using Entities
+@model Game
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Ordering";
+}
+<div class="catalog-container">
+    <p class="ordertitle">Оформление заказа</p>
+    <a href="@Url.Action("GameProfile","Game", new { id = Model.GameId})" class="catalog-item order">
+        <div class="catalog-img">
+            @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
+            + Model.Image + "\" />")
+        </div>
+        <div class="catalog-name">
+            <span class="game-title">@Model.Name</span>
+            <div class="catalog-category">
+                <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
+                <p>@Model.Category</p>
+            </div>
+        </div>
+        <div class="catalog-price"><span>@Model.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+    </a>
+</div>
+@using (Html.BeginForm("OrderForm", "Order", FormMethod.Post, new { @class = "addgameform" }))
+{
+    @Html.TextBox("Email", "", new { @placeholder = "Введите email", @class = "forminput" })
+    <p><input type="submit" value="Оплатить" class="addgamebutton" /></p>
+}
+
+

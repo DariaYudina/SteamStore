@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SteamStore.AbstractBLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,16 @@ namespace SteamStore.WebUI.Controllers
 {
     public class OrderController : Controller
     {
-        // GET: Order
-        public ActionResult Order()
+
+        public IGameBLL _gameLogic;
+        public OrderController(IGameBLL gameLogic)
         {
-            return View();
+            _gameLogic = gameLogic;
+        }
+        [HttpGet]
+        public ActionResult OrderForm(int id)
+        {
+            return View(_gameLogic.GetGame(id));
         }
     }
 }

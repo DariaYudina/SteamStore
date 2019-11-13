@@ -291,7 +291,9 @@ footer .wrapper2 {
 .catalog-item:hover{
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
-
+.catalog-item.order:hover {
+    box-shadow: none;
+}
 .catalog-item:hover .game-title {
     color: tomato;
      transition: 0.3s;
@@ -464,9 +466,10 @@ input[type="file"] {
     border: 1px solid #ccc;
     padding: 6px 12px;
     cursor: pointer;
-    font-size: 13px;
-    background-color:inherit;
+    background-color: inherit;
     color: grey;
+    width: 300px;
+    font-weight: normal;
 }
 /*Game profile*/
 .gameprofile-container {
@@ -727,6 +730,7 @@ input[type="file"] {
     text-transform: uppercase;
     margin-bottom: 20px;
     background: linear-gradient(45deg, #ff4148,#ff793a);
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: absolute;
     top: 50%;
@@ -747,6 +751,12 @@ input[type="file"] {
 /* main page */
 .pagination {
     margin-bottom: 30px;
+}
+.ordertitle {
+    font-family: Play,Arial,sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: dimgrey;
 }
 /* styles for validation helpers */
 .field-validation-error {

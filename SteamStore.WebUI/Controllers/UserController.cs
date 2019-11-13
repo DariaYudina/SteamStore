@@ -29,7 +29,7 @@ namespace SteamStore.WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult SignUp([Bind(Include = "Name, Password")] SignupModel signupModel, HttpPostedFileBase Avatar)
+        public ActionResult SignUp(SignupModel signupModel, HttpPostedFileBase Avatar)
         {
             if (ModelState.IsValid)
             {
@@ -53,6 +53,7 @@ namespace SteamStore.WebUI.Controllers
                 msg.Subject = "Подтверждение регистрации";
                 msg.Body = string.Format("Для завершения регистрации перейдите по ссылке: " + "<a href=\"{0}\" title=\"Подтвердить регистрацию\">{0}</a>", Url.Action("ConfirmEmail", "User", new { userName = signupModel.Login, email = signupModel.Email }, Request.Url.Scheme));
                 msg.IsBodyHtml = true;
+
                 SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
                 smtp.UseDefaultCredentials = false;
                 smtp.Credentials = new NetworkCredential("dashaudina06@gmail.com", "dD89271518969");
