@@ -159,9 +159,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Halpers\PagingHelpers.cs" />
     <Compile Include="Infastructure\NinjectRegistrations.cs" />
     <Compile Include="Models\AddGameModel.cs" />
+    <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\MyUserProvider.cs" />
+    <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Models\SigninModel.cs" />
     <Compile Include="Models\SignupModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

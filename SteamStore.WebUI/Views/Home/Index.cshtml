@@ -4,7 +4,7 @@
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "STEAMGAMES";
 }
-@if (User.Identity.IsAuthenticated && @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
+@*@if (User.Identity.IsAuthenticated && @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
 {
     <div class="signupcontainer">
         @foreach (var p in @Model)
@@ -17,7 +17,7 @@
             </div>
         }
     </div>
-}
+}*@
 <div class="backposition">
     <div class="main-background-image"></div>
     <p class="shoptitle">

@@ -1,4 +1,5 @@
-﻿using SteamStore.AbstractBLL;
+﻿using Entities;
+using SteamStore.AbstractBLL;
 using SteamStore.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,14 @@ namespace SteamStore.WebUI.Controllers
             _gameLogic = gameLogic;
         }
         [HttpGet]
-        public ActionResult Catalog()
+        public ActionResult Catalog(int page = 1)
         {
-            return View(_gameLogic.GetGames());
+            var games = _gameLogic.GetGames().ToList();
+            int pageSize = 5; // количество объектов на страницу
+            IEnumerable<Game> gamesPerPages = games.Skip((page - 1) * pageSize).Take(pageSize);
+            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = games.Count };
+            IndexViewModel ivm = new IndexViewModel { PageInfo = pageInfo, Games = gamesPerPages };
+            return View(ivm);
         }
         [HttpGet]
         public ActionResult AddGame()
@@ -64,5 +70,6 @@ namespace SteamStore.WebUI.Controllers
         {
             return View(_gameLogic.GetGame(id));
         }
+
     }
 }

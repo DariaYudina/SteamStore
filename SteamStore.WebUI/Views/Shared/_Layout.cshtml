@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/Site.css">
     <link rel="icon" href="~/Content/images/favicon.ico" type="image/x-icon" />
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -15,18 +16,18 @@
             <nav class="nav">
                 <div class="wrapper2">
                     <div class="menu-wrapper">
-                        <a href="#" alt="logo">
+                        <a href="@Url.Action("Index", "Home")" alt="logo">
                             <img src="~/Content/images/logoOrange.png" alt="logo" class="logo">
-                            <p>STEAMGAMES</p>
+                            <span>STEAMGAMES</span>
                         </a>
-                        <a href="#" class="icon border menu">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="23px" height="18px">
-                                <path fill="#000" d="M-0.000,18.000 L-0.000,16.000 L23.000,16.000 L23.000,18.000 L-0.000,18.000 ZM-0.000,8.000 L23.000,8.000 L23.000,10.000 L-0.000,10.000 L-0.000,8.000 ZM-0.000,-0.000 L23.000,-0.000 L23.000,2.000 L-0.000,2.000 L-0.000,-0.000 Z"></path>
-                            </svg>
-                        </a>
-                        @Html.ActionLink("Главная", "Index", "Home", null, new { @class = "active-small" })
-                        @Html.ActionLink("Каталог", "Catalog", "Game", null, new { @class = "active-small" })
-                    </div>
+                            <a href="#" class="icon border menu">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23px" height="18px">
+                                    <path fill="#000" d="M-0.000,18.000 L-0.000,16.000 L23.000,16.000 L23.000,18.000 L-0.000,18.000 ZM-0.000,8.000 L23.000,8.000 L23.000,10.000 L-0.000,10.000 L-0.000,8.000 ZM-0.000,-0.000 L23.000,-0.000 L23.000,2.000 L-0.000,2.000 L-0.000,-0.000 Z"></path>
+                                </svg>
+                            </a>
+                            @Html.ActionLink("Главная", "Index", "Home", null, new { @class = "active-small" })
+                            @Html.ActionLink("Каталог", "Catalog", "Game", null, new { @class = "active-small" })
+</div>
                     <div class="icon-wrapper">
                         <a href="#" class="icon menu">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 28.632 26.77"><path fill-rule="evenodd" clip-rule="evenodd" fill="#141414" d="M26.478 2.622l-.174-.192C24.89.863 23.002 0 20.988 0s-3.902.863-5.316 2.429l-1.356 1.503-1.356-1.503C11.546.863 9.658 0 7.644 0S3.742.863 2.328 2.429l-.174.193C.765 4.161 0 6.2 0 8.365c0 2.165.765 4.204 2.154 5.743l.009.01L13.606 26.46a.967.967 0 0 0 1.42 0l11.443-12.342.009-.01c1.389-1.539 2.154-3.578 2.154-5.743 0-2.165-.765-4.204-2.154-5.743zm-1.434 10.182L14.316 24.375 3.587 12.804c-2.207-2.451-2.205-6.434.005-8.883l.174-.193c1.042-1.154 2.419-1.79 3.878-1.79s2.836.636 3.878 1.79l2.075 2.299a.971.971 0 0 0 1.438 0l2.075-2.299c1.042-1.154 2.419-1.79 3.878-1.79s2.836.636 3.879 1.79l.174.192c2.209 2.45 2.211 6.433.003 8.884z"></path></svg>
