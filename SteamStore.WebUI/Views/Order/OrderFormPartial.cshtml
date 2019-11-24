@@ -1,0 +1,60 @@
+﻿@model  SteamStore.WebUI.Models.AddOrderModel
+
+@using (Html.BeginForm("OrderFormPartial", "Order", new { @id = ViewBag.id }, FormMethod.Post, new { @class = "addgameform", @name = "go" }))
+{
+    @Html.TextBox("Email", "", new { @placeholder = "Введите email", @class = "forminput" })
+    <div class="editor-field">
+        @Html.ValidationMessageFor(model => model.Email)
+        <p class="error-message field-validation-error" id="error-message"></p>
+    </div>
+    @Html.TextBoxFor(m => m.OrderQuantity, new { @type = "number", @min = "0", @placeholder = "Введите количество", @class = "forminput" })
+    <div class="editor-field">
+        @Html.ValidationMessageFor(model => model.OrderQuantity)
+    </div>
+    <p><input type="submit" value="Оплатить" class="addgamebutton" /></p>
+}
+<script>
+    document.forms.go.onsubmit = function () {
+        let input = document.getElementById("Email");
+        let text = document.getElementById("Email").value;
+        let errorMessage = document.getElementById("error-message");
+        if (text != null && !hasWhiteSpaces(text)) {
+            if (text.length >= 3) {
+                if (!validationEmail(text)) {
+                    input.classList.add("input-validation-error");
+                    errorMessage.style.display = "block";
+                    errorMessage.innerText = "Поле Email не содержит допустимый адрес электронной почты";
+                    return false;
+                } else {
+                    input.style.border = "1px solid silver";
+                    errorMessage.style.display = "none";
+                    return true;
+                }
+            } else {
+                input.classList.add("input-validation-error");
+                errorMessage.style.display = "block";
+                errorMessage.innerText = "Длина поля должна быть больше 3";
+                return false;
+            }
+        } else {
+            input.classList.add("input-validation-error");
+            errorMessage.style.display = "block";
+            errorMessage.innerText = "Длина поля должна быть больше 3";
+            return false;
+        }
+
+    }
+    function hasWhiteSpaces(s) {
+        if (/^ *$/.test(s)) {
+            return true;
+        }
+        return false;
+    }
+    function validationEmail(s) {
+        let re = /^[_a-z0-9-A-Z-]+(\.[_a-z0-9-A-Z-]+)*@@[a-z0-9-A-Z-]+(\.[a-z0-9-A-Z-]+)*(\.[a-z]{2,4})$/;
+        if (re.test(s)) {
+            return (true)
+        }
+        return (false)
+    }
+</script>

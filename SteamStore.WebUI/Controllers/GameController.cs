@@ -33,25 +33,35 @@ namespace SteamStore.WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddGame(AddGameModel addGameModel, HttpPostedFileBase image)
+        public ActionResult AddGame(AddGameModel addGameModel, IList<HttpPostedFileBase> images)
         {
+            var imageslist = images.ToList();
             var gameimage = "";
+            string[] gameimages = new string[3];
             byte[] imageData = null;
             if (ModelState.IsValid)
             {
-                if (image != null)
+                for (int i = 0; i < gameimages.Length; i++)
                 {
-                    using (var binaryReader = new BinaryReader(image.InputStream))
+                    if (imageslist[i] != null)
                     {
-                        imageData = binaryReader.ReadBytes(image.ContentLength);
+                        using (var binaryReader = new BinaryReader(imageslist[i].InputStream))
+                        {
+                            imageData = binaryReader.ReadBytes(imageslist[i].ContentLength);
+                        }
+                        gameimages[i] = Convert.ToBase64String(imageData);
                     }
-                    gameimage = Convert.ToBase64String(imageData);
+                    else
+                    {
+
+                        gameimages[i] = AddGameModel.defaultImage;
+                        if(i == 1)
+                        {
+                            gameimages[i] = AddGameModel.defailtprofileimage;
+                        }
+                    }
                 }
-                else
-                {
-                    gameimage = AddGameModel.defaultImage;
-                }
-                _gameLogic.AddGame(addGameModel.Name, addGameModel.Price, gameimage, addGameModel.Description, addGameModel.Category, addGameModel.Producer);
+                _gameLogic.AddGame(addGameModel.Name, addGameModel.Price, gameimages[0], addGameModel.Description, addGameModel.Category, addGameModel.Producer, gameimages[1], gameimages[2]);
                 return RedirectToAction("Catalog");
             }
             return View(addGameModel);
@@ -65,6 +75,5 @@ namespace SteamStore.WebUI.Controllers
             }
             return View(_gameLogic.GetGame(id));
         }
-
     }
 }

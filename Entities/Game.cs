@@ -13,11 +13,8 @@ namespace Entities
         private string category;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Game()
-        {
-            Orders = new HashSet<Order>();
-        }
-        public Game(string name, decimal price, string image, string description, string category, string producer) : this()
+        public Game(){ }
+        public Game(string name, decimal price, string image, string description, string category, string producer, string profileImage, string backgroundImage) : this()
         {
             Name = name;
             Price = price;
@@ -25,6 +22,8 @@ namespace Entities
             Description = description;
             Category = category;
             Producer = producer;
+            ProfileImage = profileImage;
+            BackgroundImage = backgroundImage;
         }
         public int GameId { get; set; }
 
@@ -69,10 +68,8 @@ namespace Entities
         }
 
         public string Image { get; set; }
-
+        public string ProfileImage { get; set; }
+        public string BackgroundImage { get; set; }
         public string Producer { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }

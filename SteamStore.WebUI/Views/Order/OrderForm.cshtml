@@ -21,10 +21,6 @@
         <div class="catalog-price"><span>@Model.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
     </a>
 </div>
-@using (Html.BeginForm("OrderForm", "Order", FormMethod.Post, new { @class = "addgameform" }))
-{
-    @Html.TextBox("Email", "", new { @placeholder = "Введите email", @class = "forminput" })
-    <p><input type="submit" value="Оплатить" class="addgamebutton" /></p>
-}
+@Html.Action("OrderFormPartial","Order", new { id = Model.GameId})
 
 

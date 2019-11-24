@@ -1,5 +1,5 @@
 ﻿@using Entities;
-@model IEnumerable<User>
+@model IEnumerable<Game>
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "STEAMGAMES";
@@ -32,85 +32,46 @@
             <div class="game-sort-item">Новинки</div>
             <div class="game-sort-item">Ожидаемые</div>
         </div>
-        <a href="#" class="catalog-item main">
-            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
+        @foreach (var g in @Model)
+        {
+        <a href="@Url.Action("GameProfile","Game", new { id = g.GameId})" class="catalog-item main">
+                    <div class="catalog-img">
+            @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
+            + g.Image + "\" />")
+        </div>
             <div class="catalog-name">
-                <span>The Outer Worlds</span>
+                <span>@g.Name</span>
                 <div class="catalog-category">
-                    <img src="image/rpg.png" alt="">
-                    <span>RPG</span>
+                    <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
+                    <span>@g.Producer</span>
                 </div>
             </div>
-            <div class="catalog-price"><span>1000</span><img src="image/rub.png" alt="rub"></div>
+            <div class="catalog-price"><span>@g.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
         </a>
-        <a href="#" class="catalog-item main">
-            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
-            <div class="catalog-name">
-                <span>Moons of Madness</span>
-                <div class="catalog-category">
-                    <img src="image/rpg.png" alt="">
-                    <span>Приключения</span>
-                </div>
-            </div>
-            <div class="catalog-price"><span>1589</span><img src="image/rub.png" alt="rub"></div>
-        </a>
-        <a href="#" class="catalog-item main">
-            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
-            <div class="catalog-name">
-                <span>The Outer Worlds</span>
-                <div class="catalog-category">
-                    <img src="image/rpg.png" alt="">
-                    <span>RPG</span>
-                </div>
-            </div>
-            <div class="catalog-price"><span>1000</span><img src="image/rub.png" alt="rub"></div>
-        </a>
+        }
     </div>
     <div class="catalog-container main discount">
         <h3>Скидки</h3>
-        <a href="#" class="catalog-item main">
-            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
-            <div class="catalog-name">
-                <span>The Outer Worlds</span>
-                <div class="catalog-category">
-                    <img src="image/rpg.png" alt="">
-                    <span>RPG</span>
+        <div class="game-sort main">
+            <div class="game-sort-item">Новинки</div>
+            <div class="game-sort-item">Ожидаемые</div>
+        </div>
+        @foreach (var g in @Model)
+        {
+            <a href="@Url.Action("GameProfile","Game", new { id = g.GameId})" class="catalog-item main">
+                <div class="catalog-img">
+                    @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
+                    + g.Image + "\" />")
                 </div>
-            </div>
-            <div class="catalog-price"><span>1000</span><img src="image/rub.png" alt="rub"></div>
-        </a>
-        <a href="#" class="catalog-item main">
-            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
-            <div class="catalog-name">
-                <span>The Outer Worlds</span>
-                <div class="catalog-category">
-                    <img src="image/rpg.png" alt="">
-                    <span>RPG</span>
+                <div class="catalog-name">
+                    <span>@g.Name</span>
+                    <div class="catalog-category">
+                        <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
+                        <span>@g.Producer</span>
+                    </div>
                 </div>
-            </div>
-            <div class="catalog-price"><span>1000</span><img src="image/rub.png" alt="rub"></div>
-        </a>
-        <a href="#" class="catalog-item main">
-            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
-            <div class="catalog-name">
-                <span>The Outer Worlds</span>
-                <div class="catalog-category">
-                    <img src="image/rpg.png" alt="">
-                    <span>RPG</span>
-                </div>
-            </div>
-            <div class="catalog-price"><span>1000</span><img src="image/rub.png" alt="rub"></div>
-        </a>
-        <a href="#" class="catalog-item main">
-            <div class="catalog-img"><img src="image/game.jpg" alt=""></div>
-            <div class="catalog-name">
-                <span>The Outer Worlds</span>
-                <div class="catalog-category">
-                    <img src="image/rpg.png" alt="">
-                    <span>RPG</span>
-                </div>
-            </div>
-            <div class="catalog-price"><span>1000</span><img src="image/rub.png" alt="rub"></div>
-        </a>
+                <div class="catalog-price"><span>@g.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+            </a>
+        }
     </div>
 </div>

@@ -31,7 +31,18 @@
         <label for="file-upload" class="custom-file-upload">
             <i class="fa fa-cloud-upload"></i> Загрузите обложку
         </label>
-        @Html.TextBoxFor(i => i.Image, new { @type = "file", @class = "forminput", @id = "file-upload"})
+       // @Html.TextBoxFor(i => i.Image, new { @type = "file", @class = "forminput", @id = "file-upload" })
+        <input type="file" name="images" id = "file-upload" class = "forminput"/>
+        <label for="file-upload2" class="custom-file-upload">
+            <i class="fa fa-cloud-upload"></i> Загрузите обложку для профайла
+        </label>
+       // @Html.TextBoxFor(i => i.ProfileImage, new { @type = "file", @class = "forminput", @id = "file-upload2" })
+        <input type="file" name="images" id="file-upload2" class="forminput" />
+        <label for="file-upload3" class="custom-file-upload">
+            <i class="fa fa-cloud-upload"></i> Загрузите обложку для фона 
+        </label>
+       // @Html.TextBoxFor(i => i.BackgroundImage, new { @type = "file", @class = "forminput", @id = "file-upload3" })
+        <input type="file" name="images" id="file-upload3" class="forminput" />
         <p><input type="submit" value="Add Game" class="addgamebutton" /></p>
     }
 }

@@ -18,6 +18,8 @@ namespace SteamStore.WebUI.Infastructure
             Bind<IUserDAL>().To<UserDao>().InSingletonScope();
             Bind<IGameBLL>().To<GameLogic>().InSingletonScope();
             Bind<IGameDAL>().To<GameDao>().InSingletonScope();
+            Bind<IOrderBLL>().To<OrderLogic>().InSingletonScope();
+            Bind<IOrderDAL>().To<OrderDao>().InSingletonScope();
         }
     }
 }

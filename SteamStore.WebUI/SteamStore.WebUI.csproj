@@ -147,6 +147,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -162,6 +164,7 @@
     <Compile Include="Halpers\PagingHelpers.cs" />
     <Compile Include="Infastructure\NinjectRegistrations.cs" />
     <Compile Include="Models\AddGameModel.cs" />
+    <Compile Include="Models\AddOrderModel.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\MyUserProvider.cs" />
     <Compile Include="Models\PageInfo.cs" />
@@ -192,6 +195,8 @@
     <Content Include="Views\Order\OrderForm.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\Order\OrderFormPartial.cshtml" />
+    <Content Include="Views\Order\OrderCompleted.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

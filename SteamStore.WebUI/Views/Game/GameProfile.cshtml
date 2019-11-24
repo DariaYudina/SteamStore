@@ -4,7 +4,12 @@
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Game profile";
 }
-<div class="background-image"></div>
+    <div class="background-image">
+        <a href="#">
+            @Html.Raw("<img class='background-img' src=\"data:image/jpeg;base64,"
+             + @Model.BackgroundImage + "\" />")
+        </a>
+    </div>
 <div class="gameprofile-container">
     <h1 class="gametitle">@Model.Name</h1>
     <div class="gameProfileItem">
@@ -12,7 +17,7 @@
             <div class="profileimage">
                 <a href="#">
                    @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
-                    + @Model.Image + "\" />")
+                    + @Model.ProfileImage + "\" />")
                 </a>
             </div>
             <div class="gameprofiletextcontainer">
@@ -27,7 +32,7 @@
                     </div>
                 </div>
                 <div class="gamerating">
-                    <p>Рейтинг</p>
+                    <p>Рейтинг: 18+</p>
                 </div>
             </div>
         </div>
@@ -42,7 +47,7 @@
                     </ul>
                 </div>
                 <div class="shopcontainer">
-                    <div class="price">@Model.Price <span class="rub">руб.</span></div>
+                    <div class="price">@Model.Price.ToString("#.##") <span class="rub">руб.</span></div>
                     <div class="buttoncontainer">
                         @Html.ActionLink("Купить", "OrderForm", "Order", new { @id = Model.GameId }, new { @class = "buy" })
                         <a href="#" class="basket">
@@ -70,13 +75,52 @@
             </div>
             <div class="gameprofile-right-item">
                 <p class="blocktitle">Минимальные системные требования</p>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique, libero ullam, ut esse recusandae fugiat reprehenderit ea saepe officia doloremque sequi at rerum eos sit, dolore dolorum eveniet blanditiis necessitatibus!</p>
-                
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#panel1">Windows</a></li>
+                    <li><a data-toggle="tab" href="#panel2">Linux</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="panel1" class="tab-pane fade in active">
+                        <div class="tab-item">
+                            <div class="tab-key">OC</div>
+                            <div class="tab-value">64-bit Windows 7/8.1/10</div>
+                        </div>
+                        <div class="tab-item">
+                            <div class="tab-key">Процессор</div>
+                            <div class="tab-value">
+                                AMD FX-6100/Intel i3-3220 or Equivalent
+                            </div>
+                        </div>
+                        <div class="tab-item">
+                            <div class="tab-key">Оперативная память</div>
+                            <div class="tab-value">8 GB ОЗУ</div>
+                        </div>
+                        <div class="tab-item">
+                            <div class="tab-key">Видеокарта</div>
+                            <div class="tab-value">AMD Radeon HD 7750, NVIDIA GeForce GTX 650 or Equivalent</div>
+                        </div>
+                        <div class="tab-item">
+                            <div class="tab-key">DirectX</div>
+                            <div class="tab-value">Версии 11</div>
+                        </div>
+                        <div class="tab-item">
+                            <div class="tab-key">Жесткий диск</div>
+                            <div class="tab-value">55 GB</div>
+                        </div>
+                    </div>
+                    <div id="panel2" class="tab-pane fade">
+
+                    </div>
+                </div>
             </div>
             <div class="gameprofile-right-item">
                 <div class="comment">
                     <p class="blocktitle">Комментарии</p>
-                    <p class="out">Выйти</p>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <p class="out">Войти</p>
+                    }
                 </div>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora sunt, cum rem tempore autem assumenda commodi voluptate laudantium? Inventore hic reprehenderit modi rem, quis omnis voluptatem doloribus nulla repudiandae reiciendis.</p>
             </div>

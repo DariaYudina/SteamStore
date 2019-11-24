@@ -17,9 +17,9 @@ namespace SteamStore.BLL
             _gameDao = gameDao;
         }
 
-        public void AddGame(string name, decimal price, string image, string description, string category, string producer)
+        public void AddGame(string name, decimal price, string image, string description, string category, string producer, string profileImage, string backgroundImage)
         {
-            Game game = new Game(name, price, image, description, category, producer);
+            Game game = new Game(name, price, image, description, category, producer, profileImage, backgroundImage);
             _gameDao.AddGame(game);
         }
 

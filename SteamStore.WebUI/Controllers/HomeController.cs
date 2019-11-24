@@ -11,14 +11,15 @@ namespace SteamStore.WebUI.Controllers
     public class HomeController : Controller
     {
         IUserBLL _userLogic;
-        public HomeController(IUserBLL userLogic)
+        IGameBLL _gameLogic;
+        public HomeController(IGameBLL gameLogic)
         {
-            _userLogic = userLogic;
+            _gameLogic = gameLogic;
         }
         [HttpGet]
         public ActionResult Index()
         {
-            return View(_userLogic.GetUsers());
+            return View(_gameLogic.GetGames());
         }
 
     }

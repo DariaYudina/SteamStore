@@ -9,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace SteamStore.DAL
 {
-    public class GameDao : IGameDAL
+    public class OrderDao : IOrderDAL
     {
-        public void AddGame(Game game)
+        public void AddOrder(Order order)
         {
             using (var db = new EFDbContext())
             {
-                db.Games.Add(game);
+                db.Orders.Add(order);
                 db.SaveChanges();
             }
         }
-        public IEnumerable<Game> GetGames()
+        public IEnumerable<Order> GetOrders()
         {
             using (var db = new EFDbContext())
             {
-                return db.Games.ToList();
+                return db.Orders.ToList();
             }
         }
     }

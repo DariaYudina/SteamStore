@@ -317,7 +317,6 @@ footer .wrapper2 {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    vertical-align: middle;
     line-height: 1.7;
 }
 
@@ -484,13 +483,18 @@ input[type="file"] {
 .background-image {
     width: 100vw;
     height: 500px;
-    background-image: url(images/background.jpg);
+    background-image: url(images/background.jpg); 
     background-repeat: no-repeat;
-    filter: brightness(0.6);
+    filter: brightness(0.7);
     background-size: cover;
     background-attachment: fixed;
 }
-
+.background-img {
+    width: 100vw;
+    height: 500px;
+    object-fit: cover;
+    filter: brightness(0.7);
+}
 .gameProfileItem {
     display: flex;
     justify-content: center;
@@ -783,3 +787,27 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 /* styles for validation helpers */
+.tab-item {
+    display: flex;
+    padding-top: 15px;
+
+}
+.tab-key {
+    color: #909090;
+    min-width: 30%;
+}
+img{
+    vertical-align:baseline;
+}
+.ordercomplet{
+    margin-top: 30px;
+    text-align:center;
+    font-weight:bold;
+    color: tomato;
+}
+
+.error-message {
+    display: none;
+    word-break: break-word;
+    width: 300px;
+}

@@ -10,7 +10,7 @@ namespace SteamStore.AbstractBLL
     public interface IGameBLL
     {
         IEnumerable<Game> GetGames();
-        void AddGame(string name, decimal price, string image, string description, string category, string producer);
+        void AddGame(string name, decimal price, string image, string description, string category, string producer, string profileImage, string backgroundImage);
         Game GetGame(int id);
         IEnumerable<Game> GetGames(params int[] ids);
     }
