@@ -32,11 +32,36 @@ namespace SteamStore.WebUI.Controllers
             var game = _gameLogic.GetGame(_gameId);
             if (ModelState.IsValid)
             {
+                addorderModel.OrderPrice = game.Price * addorderModel.OrderQuantity;
                 MailAddress from = new MailAddress("dashaudina06@gmail.com", "Order");
                 MailAddress to = new MailAddress(addorderModel.Email);
                 MailMessage msg = new MailMessage(from, to);
+                string test = "";
+                for (int i = 0; i < addorderModel.OrderQuantity; i++)
+                {
+                    test += @"<tr style =""padding: 5px;"">
+                                <td>" + $"{game.Name}" + @"</td>
+                                <td>" + $"{game.Price}" + @" руб.</td>
+                                <td>" + $"{Guid.NewGuid().ToString()}" + @"</td>
+                            </tr>";
+                }
                 msg.Subject = "Steam Store: Покупка игры";
-                msg.Body = @"<table><tr><td colspan=""2"">STEAM STORE\br Вы приобрели игру</td></tr><tr><td></td><td></td></tr><tr> <td colspan=""2""></td></tr></table>";
+                msg.Body = @"<table style=""font-family:Play,Arial,sans-serif;font-weight:600;font-size: 18px;color: dimgrey;"">
+                                <tr style =""padding: 5px;"">
+                                    <td colspan=""2"" style = ""text-align:center;color: tomato"">STEAM GAMES</td>
+                                </tr>
+                                <tr style =""padding: 5px;"">
+                                    <td colspan=""2"">Вы приобрели игру:" + @"</td>
+                                </tr>"+
+                                $"{ test }"+
+                                @"<tr style =""padding: 5px;"">
+                                    <td> Количество: </td>
+                                    <td>" + $"{addorderModel.OrderQuantity}" + @"</td>
+                                </tr>
+                                <tr style =""padding: 5px;""> 
+                                    <td colspan=""2"">Общая стоимость: " + $"{addorderModel.OrderPrice}" + @" руб.</td>
+                                </tr>
+                            </table>";
                 msg.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
                 smtp.UseDefaultCredentials = false;
@@ -46,12 +71,12 @@ namespace SteamStore.WebUI.Controllers
                 
                 if (!User.Identity.IsAuthenticated)
                 {
-                    _orderLogic.AddOrder(16, _gameId, DateTime.Now, addorderModel.OrderQuantity, game.Price * addorderModel.OrderQuantity, addorderModel.Email);
+                    _orderLogic.AddOrder(16, _gameId, DateTime.Now, addorderModel.OrderQuantity, addorderModel.OrderPrice, addorderModel.Email);
                 }
                 else
                 {
                     var user = _userLogic.GetUsers().FirstOrDefault(u => u.Login == User.Identity.Name);
-                    _orderLogic.AddOrder(user.UserId, _gameId, DateTime.Now, addorderModel.OrderQuantity, game.Price * addorderModel.OrderQuantity, addorderModel.Email);
+                    _orderLogic.AddOrder(user.UserId, _gameId, DateTime.Now, addorderModel.OrderQuantity, addorderModel.OrderPrice, addorderModel.Email);
                 }
 
                 return RedirectToAction("OrderCompleted", "Order");

@@ -50,6 +50,7 @@
                     <div class="price">@Model.Price.ToString("#.##") <span class="rub">руб.</span></div>
                     <div class="buttoncontainer">
                         @Html.ActionLink("Купить", "OrderForm", "Order", new { @id = Model.GameId }, new { @class = "buy" })
+                        @Html.ActionLink("Корзина", "Cart", "Cart", null, new { @class = "basket" })
                         <a href="#" class="basket">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="31" height="20" viewBox="0 0 37.438 26.646">
