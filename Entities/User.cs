@@ -60,10 +60,6 @@ namespace Entities
             get => email;
             set
             {
-                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Email", "Email must be neither null nor empty");
-                }
                 email = value;
             }
         }

@@ -8,6 +8,7 @@ namespace Entities
 
     public partial class Order
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order() { }
         public Order(int userId, int gameId, DateTime date, int orderQuantity, decimal orderprice, string email)
         {
@@ -18,7 +19,6 @@ namespace Entities
             OrderPrice = orderprice;
             Email = email;
         }
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int OrderId { get; set; }
         public int? UserId { get; set; }
         public int? GameId { get; set; }

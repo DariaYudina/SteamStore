@@ -1,6 +1,7 @@
 ﻿using SteamStore.AbstractBLL;
 using SteamStore.WebUI.Models;
 using System;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web.Mvc;
@@ -12,10 +13,12 @@ namespace SteamStore.WebUI.Controllers
         private static int _gameId;
         public IGameBLL _gameLogic;
         public IOrderBLL _orderLogic;
-        public OrderController(IGameBLL gameLogic, IOrderBLL orderLogic)
+        public IUserBLL _userLogic;
+        public OrderController(IGameBLL gameLogic, IOrderBLL orderLogic, IUserBLL userLogic)
         {
             _gameLogic = gameLogic;
             _orderLogic = orderLogic;
+            _userLogic = userLogic;
         }
         [HttpGet]
         public ActionResult OrderForm(int id)
@@ -33,10 +36,7 @@ namespace SteamStore.WebUI.Controllers
                 MailAddress to = new MailAddress(addorderModel.Email);
                 MailMessage msg = new MailMessage(from, to);
                 msg.Subject = "Steam Store: Покупка игры";
-                msg.Body = $"Вы приобрели игру {game.Name}.\n " +
-                           $"Цена игры: {game.Price} руб.\n" +
-                           $"Ключ активации: {Guid.NewGuid().ToString()}\n" +                        
-                           $"Теперь вы можете активировать игру в Steam.";
+                msg.Body = @"<table><tr><td colspan=""2"">STEAM STORE\br Вы приобрели игру</td></tr><tr><td></td><td></td></tr><tr> <td colspan=""2""></td></tr></table>";
                 msg.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
                 smtp.UseDefaultCredentials = false;
@@ -48,6 +48,12 @@ namespace SteamStore.WebUI.Controllers
                 {
                     _orderLogic.AddOrder(16, _gameId, DateTime.Now, addorderModel.OrderQuantity, game.Price * addorderModel.OrderQuantity, addorderModel.Email);
                 }
+                else
+                {
+                    var user = _userLogic.GetUsers().FirstOrDefault(u => u.Login == User.Identity.Name);
+                    _orderLogic.AddOrder(user.UserId, _gameId, DateTime.Now, addorderModel.OrderQuantity, game.Price * addorderModel.OrderQuantity, addorderModel.Email);
+                }
+
                 return RedirectToAction("OrderCompleted", "Order");
             }
             return View(addorderModel);
