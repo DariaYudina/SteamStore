@@ -1,0 +1,32 @@
+﻿@using SteamStore.WebUI.Models;
+@model  List<CartItemModel>
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Ordering";
+}
+<div class="catalog-container">
+    <p class="ordertitle">Оформление заказа</p>
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action(" GameProfile","Game", new { id=item.Game.GameId})" class="catalog-item order">
+            <div class="catalog-img">
+                @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
+                                + item.Game.Image + "\" />")
+            </div>
+            <div class="catalog-name">
+                <span class="game-title">@item.Game.Name</span>
+                <div class="catalog-category">
+                    <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
+                    <p>@item.Game.Category</p>
+                </div>
+            </div>
+            <div class="catalog-price"><span>@item.Gamequantity шт.</span></div>
+            <div class="catalog-price"><span>@item.Game.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+        </a>
+    }
+</div>
+@Html.Action("OrdersFormPartial", "Order")
+@* Не работает переход по ссылке из-за url *@
+
+
+

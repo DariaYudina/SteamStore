@@ -163,6 +163,9 @@
     <Compile Include="Infastructure\NinjectRegistrations.cs" />
     <Compile Include="Models\AddGameModel.cs" />
     <Compile Include="Models\AddOrderModel.cs" />
+    <Compile Include="Models\AddOrdersModel.cs" />
+    <Compile Include="Models\CartItemModel.cs" />
+    <Compile Include="Models\CookieItemModel.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\MyUserProvider.cs" />
     <Compile Include="Models\PageInfo.cs" />
@@ -195,7 +198,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Order\OrderFormPartial.cshtml" />
     <Content Include="Views\Order\OrderCompleted.cshtml" />
-    <Content Include="Views\Cart\Cart.cshtml" />
+    <Content Include="Views\Cart\MyCart.cshtml" />
+    <Content Include="Views\Order\MyOrders.cshtml" />
+    <Content Include="Views\Order\OrdersForm.cshtml" />
+    <Content Include="Views\Order\OrdersFormPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

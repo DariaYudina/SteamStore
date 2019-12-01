@@ -30,7 +30,10 @@
     }
     @if (User.Identity.IsAuthenticated && @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
     {
-        <div class="addlinkbutton"> @Html.ActionLink("Добавить игру", "AddGame", "Game", null, new { @class = "addgamelink" })</div>
+        <div class="buttoncontainer">
+            <div class="addlinkbutton"> @Html.ActionLink("Добавить игру", "AddGame", "Game", null, new { @class = "addgamelink" })</div>
+
+        </div>
     }
 </div>
 <div class="btn-group pagination">

@@ -10,7 +10,6 @@ namespace SteamStore.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        IUserBLL _userLogic;
         IGameBLL _gameLogic;
         public HomeController(IGameBLL gameLogic)
         {
@@ -19,7 +18,7 @@ namespace SteamStore.WebUI.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(_gameLogic.GetGames());
+            return View(_gameLogic.GetGames().Take(5));
         }
 
     }

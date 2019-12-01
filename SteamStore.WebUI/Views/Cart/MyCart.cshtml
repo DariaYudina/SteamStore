@@ -1,0 +1,87 @@
+﻿@using SteamStore.WebUI.Models;
+@model List<CartItemModel>
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Cart";
+}
+<h2 class="catalogtitle cart">Ваша Корзина</h2>
+<div class="catalog-container" id="cartcontainer">
+    @if (Model.Count > 0)
+    {
+        foreach (var p in @Model)
+        {
+            <a href="@Url.Action("GameProfile","Game", new { id = p.Game.GameId })" class="catalog-item">
+                <div class="catalog-img">
+                    @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
+                    + p.Game.Image + "\" />")
+                </div>
+                <div class="catalog-name">
+                    <span class="game-title">@p.Game.Name</span>
+                    <div class="catalog-category">
+                        <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
+                        <p>@p.Game.Category</p>
+                    </div>
+                </div>
+                <div class="catalog-price"><span>@p.Gamequantity шт.</span></div>
+                <div class="catalog-price"><span>@p.Game.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+            </a>
+        }
+    }
+</div>
+<div class="myorders" id="emptycart">
+    Пока что вы не добавили в корзину товары
+</div>
+<div class="buttoncontainer">
+    <div class="addlinkbutton"><a class="addgamelink" id="clearcartbutton" href="#">Очистить корзину</a></div>
+    <div class="addlinkbutton"id="order"><a class="addgamelink" id="clearcartbutton" href="@Url.Action("OrdersForm", "Order")">Оформить заказ</a></div>
+</div>
+<script>
+    let cartrcontainer = document.getElementById("cartcontainer");
+    let clearcartbutton = document.getElementById("clearcartbutton"); 
+    let toorderform = document.getElementById("order");
+
+    window.onload = addMessageAboutEmptycart("CartProducts");
+    clearcartbutton.addEventListener("click", () => {
+        deleteCookie("CartProducts");
+        cartrcontainer.remove();
+        document.getElementById("emptycart").classList.add("displayflex");
+        document.getElementById("order").classList.add("noLink");
+        addMaasageAboutEmptycart("CartProducts");
+    });
+    function addMessageAboutEmptycart(name) {
+        if (getCookie(name) === undefined) {
+            document.getElementById("emptycart").classList.add("displayflex");
+            document.getElementById("order").classList.add("noLink");
+            cartrcontainer.remove();
+            cartrcontainer.classList.add("displaynone");
+        }
+    }
+    function getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ))
+        return matches ? decodeURIComponent(matches[1]) : undefined
+    }
+    function deleteCookie(name) {
+        setCookie(name, null, { expires: -1 })
+    }
+    function setCookie(name, value, props) {
+        props = props || {};
+        let exp = props.expires;
+        if (typeof exp == "number" && exp) {
+            let d = new Date();
+            d.setTime(d.getTime() + exp * 1000);
+            exp = props.expires = d;
+        }
+        if (exp && exp.toUTCString) { props.expires = exp.toUTCString() }
+        value = encodeURIComponent(value);
+        let updatedCookie = name + "=" + value + ";path=/";
+
+        for (let propName in props) {
+            updatedCookie += "; " + propName;
+            let propValue = props[propName];
+            if (propValue !== true) { updatedCookie += "=" + propValue };
+        }
+        document.cookie = updatedCookie;
+    }
+</script>

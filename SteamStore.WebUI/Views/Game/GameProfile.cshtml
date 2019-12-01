@@ -7,7 +7,7 @@
     <div class="background-image">
         <a href="#">
             @Html.Raw("<img class='background-img' src=\"data:image/jpeg;base64,"
-             + @Model.BackgroundImage + "\" />")
+      + @Model.BackgroundImage + "\" />")
         </a>
     </div>
 <div class="gameprofile-container">
@@ -16,8 +16,7 @@
         <div class="gameprofile-left">
             <div class="profileimage">
                 <a href="#">
-                   @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
-                    + @Model.ProfileImage + "\" />")
+                   @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"+ @Model.ProfileImage + "\" />")
                 </a>
             </div>
             <div class="gameprofiletextcontainer">
@@ -32,7 +31,7 @@
                     </div>
                 </div>
                 <div class="gamerating">
-                    <p>Рейтинг: 18+</p>
+                    <p>Рейтинг: 12+</p>
                 </div>
             </div>
         </div>
@@ -50,8 +49,8 @@
                     <div class="price">@Model.Price.ToString("#.##") <span class="rub">руб.</span></div>
                     <div class="buttoncontainer">
                         @Html.ActionLink("Купить", "OrderForm", "Order", new { @id = Model.GameId }, new { @class = "buy" })
-                        @Html.ActionLink("Корзина", "Cart", "Cart", null, new { @class = "basket" })
-                        <a href="#" class="basket">
+                     
+                        <a href="#" id ="addtocart" data-gameId = "@Model.GameId" class="addtocart">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="31" height="20" viewBox="0 0 37.438 26.646">
                                 <path fill="none" stroke="white" stroke-width="2"
@@ -65,7 +64,6 @@
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-miterlimit="10" cx="26.313" cy="23.682" r="2"></circle>
                             </svg>
-
                         </a>
                     </div>
                 </div>
@@ -78,7 +76,7 @@
                 <p class="blocktitle">Минимальные системные требования</p>
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#panel1">Windows</a></li>
-                    <li><a data-toggle="tab" href="#panel2">Linux</a></li>
+                    <li><a data-toggle="tab" href="#panel2">Mac</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -111,7 +109,32 @@
                         </div>
                     </div>
                     <div id="panel2" class="tab-pane fade">
-
+                        <div class="tab-item">
+                            <div class="tab-key">OC</div>
+                            <div class="tab-value">64-bit Windows 7/8.1/10</div>
+                        </div>
+                        <div class="tab-item">
+                            <div class="tab-key">Процессор</div>
+                            <div class="tab-value">
+                                AMD FX-6100/Intel i3-3220 or Equivalent
+                            </div>
+                        </div>
+                        <div class="tab-item">
+                            <div class="tab-key">Оперативная память</div>
+                            <div class="tab-value">8 GB ОЗУ</div>
+                        </div>
+                        <div class="tab-item">
+                            <div class="tab-key">Видеокарта</div>
+                            <div class="tab-value">AMD Radeon HD 7750, NVIDIA GeForce GTX 650 or Equivalent</div>
+                        </div>
+                        <div class="tab-item">
+                            <div class="tab-key">DirectX</div>
+                            <div class="tab-value">Версии 11</div>
+                        </div>
+                        <div class="tab-item">
+                            <div class="tab-key">Жесткий диск</div>
+                            <div class="tab-value">55 GB</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -128,3 +151,57 @@
         </div>
     </div>
 </div>
+<script>
+    let buybutton = document.getElementById("addtocart");
+    buybutton.addEventListener("click", () => {
+        let productID = buybutton.getAttribute("data-gameId");
+        let item = {};
+        if (getCookie("CartProducts")) {
+            let arr = JSON.parse(getCookie("CartProducts"));
+            console.log(arr);
+            if (arr.some(i => i.id === productID)) {
+                arr.forEach(i => {
+                    if (i.id === productID) {
+                        i.count += 1;
+                    }
+                })
+                setCookie("CartProducts", JSON.stringify(arr));
+            } else {
+                item = { id: productID, count: 1 };
+                arr.push(item);
+                setCookie("CartProducts", JSON.stringify(arr));
+            }
+        } else {
+            item = { id: productID, count: 1 };
+            setCookie("CartProducts", JSON.stringify([item]));
+        }
+        let arrID = [];
+    });
+
+    function getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+          "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ))
+        return matches ? decodeURIComponent(matches[1]) : undefined
+    }
+
+    function setCookie(name, value, props) {
+        props = props || {};
+        let exp = props.expires;
+        if (typeof exp == "number" && exp) {
+            let d = new Date();
+            d.setTime(d.getTime() + exp * 1000);
+            exp = props.expires = d;
+        }
+        if(exp && exp.toUTCString) { props.expires = exp.toUTCString() }
+        value = encodeURIComponent(value);
+        let updatedCookie = name + "=" + value + ";path=/";
+
+        for(let propName in props){
+            updatedCookie += "; " + propName;
+            let propValue = props[propName];
+            if (propValue !== true) { updatedCookie += "=" + propValue };
+        }
+        document.cookie = updatedCookie;
+    }
+</script>

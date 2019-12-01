@@ -1,19 +1,17 @@
-﻿@model  SteamStore.WebUI.Models.AddOrderModel
-@using (Html.BeginForm("OrderFormPartial", "Order", new { @id = ViewBag.id }, FormMethod.Post, new { @class = "addgameform", @name = "go" }))
+﻿@model  SteamStore.WebUI.Models.AddOrdersModel
+
+@using (Html.BeginForm("OrdersFormPartial", "Order", new { @id = ViewBag.id }, FormMethod.Post, new { @class = "addgameform", @name = "go" }))
 {
     @Html.TextBox("Email", "", new { @placeholder = "Введите email", @class = "forminput" })
     <div class="editor-field">
         @Html.ValidationMessageFor(model => model.Email)
         <p class="error-message field-validation-error" id="error-message"></p>
     </div>
-    @Html.TextBoxFor(m => m.OrderQuantity, new { @type = "number", @min = "0", @placeholder = "Введите количество", @class = "forminput" })
-    <div class="editor-field">
-        @Html.ValidationMessageFor(model => model.OrderQuantity)
-    </div>
     <p><input type="submit" value="Оплатить" class="addgamebutton" /></p>
 }
 <script>
     document.forms.go.onsubmit = function () {
+        
         let input = document.getElementById("Email");
         let text = document.getElementById("Email").value;
         let errorMessage = document.getElementById("error-message");
@@ -54,5 +52,11 @@
             return (true)
         }
         return (false)
+    }
+    function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ))
+    return matches ? decodeURIComponent(matches[1]) : undefined
     }
 </script>

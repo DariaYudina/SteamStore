@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Entities;
+using Newtonsoft.Json;
+using SteamStore.AbstractBLL;
+using SteamStore.WebUI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +12,31 @@ namespace SteamStore.WebUI.Controllers
 {
     public class CartController : Controller
     {
-        // GET: Cart
-        public ActionResult Cart()
+        public IGameBLL _gameLogic;
+        private List<CartItemModel> CartItems = new List<CartItemModel>();
+        public CartController(IGameBLL gameLogic)
         {
-            return View();
+            _gameLogic = gameLogic;
         }
+        [HttpGet]
+        public ActionResult MyCart()
+        {
+           
+            if (HttpContext.Request.Cookies.Count != 0)
+            {
+                var cartItems = JsonConvert.DeserializeObject<CookieItemModel[]>(HttpUtility.UrlDecode(HttpContext.Request.Cookies["CartProducts"].Value));
+                foreach (var item in cartItems)
+                {
+                    CartItems.Add(new CartItemModel(_gameLogic.GetGame(item.id), item.count));
+                }
+
+                return View(CartItems);
+            }
+            else
+            {
+                return View(CartItems);
+            }
+        }
+        
     }
 }

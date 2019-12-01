@@ -36,7 +36,6 @@ namespace SteamStore.WebUI.Controllers
         public ActionResult AddGame(AddGameModel addGameModel, IList<HttpPostedFileBase> images)
         {
             var imageslist = images.ToList();
-            var gameimage = "";
             string[] gameimages = new string[3];
             byte[] imageData = null;
             if (ModelState.IsValid)
@@ -74,6 +73,7 @@ namespace SteamStore.WebUI.Controllers
                 return HttpNotFound();
             }
             return View(_gameLogic.GetGame(id));
+
         }
     }
 }

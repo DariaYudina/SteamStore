@@ -15,11 +15,11 @@ body {
     font-family: Play,Arial,sans-serif;
      overflow-x: hidden;
 }
-input::-webkit-outer-spin-button,
+/*input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0; 
-}
+}*/
 input:focus,
 select:focus,
 textarea:focus,
@@ -385,14 +385,17 @@ footer .wrapper2 {
 }
 .addgamelink{
    padding: 5px;
+   width:150px;
 }
 .addlinkbutton{
     margin-top: 10px;
     background-color: tomato;
+    margin-right:10px;
     border-radius: 3%;
 }
 .catalogtitle{
     font-size:20px;
+    padding-top: 20px;
     margin: 0;
 }
 /*Catalog*/
@@ -682,14 +685,14 @@ input[type="file"] {
     background-position: 0 0;
 }
 
-.basket {
+.addtocart {
     background-color: rgba(0,0,0,.5);
     border: none;
     width: 80px;
     height: 80px;
 }
 
-.basket:hover svg {
+.addtocart:hover svg {
     transform: scale(1.3);
 }
 
@@ -719,7 +722,7 @@ input[type="file"] {
 }
 
 .catalog-container a {
-    color: black;
+
 }
 .catalog-container.main{
     width: 50%;
@@ -738,6 +741,19 @@ input[type="file"] {
     -webkit-text-fill-color: transparent;
     position: absolute;
     top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.shoptitle2 {
+    font-family: Play,Arial,sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 0px;
+    background: linear-gradient(45deg, #ff4148,#ff793a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: absolute;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -761,6 +777,7 @@ input[type="file"] {
     font-weight: 700;
     font-size: 20px;
     color: dimgrey;
+    padding-bottom: 20px;
 }
 /* styles for validation helpers */
 .field-validation-error {
@@ -810,4 +827,38 @@ img{
     display: none;
     word-break: break-word;
     width: 300px;
+}
+.myorders {
+    background-color: white;
+    height:100px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    display: none;
+    height:100px;
+}
+.noLink {
+    pointer-events: none;
+    background-color: gray;
+}
+.yesLink {
+    pointer-events: auto;
+}
+.displaynone{
+    display:none;
+}
+.displayflex{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.ordercount {
+    background-color: #f91155;
+    padding: 5px 9px;
+    border-radius: 50%;
+    color: white;
 }
