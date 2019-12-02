@@ -44,11 +44,6 @@
 
     catalogitems.addEventListener("click", (e) => {
         if (e.target !== e.currentTarget) {
-            catalogitems.childNodes.forEach( item => {
-                if (item.classList.contains('active')) {
-                    item.classList.remove("active");
-                }
-            })
             e.target.classList.add("active");
         }
 });
