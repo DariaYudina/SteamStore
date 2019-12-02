@@ -855,7 +855,7 @@ img{
 .displaynone{
     display:none;
 }
-.displayflex{
+.displayflex {
     display:flex;
     align-items:center;
     justify-content:center;
