@@ -7,7 +7,7 @@
 }
 <div class="catalog-container">
     <h2 class="catalogtitle">Игры</h2>
-    <div class="game-sort">
+    <div class="game-sort" id="game-sort">
         <div class="game-sort-item">Новинки</div>
         <div class="game-sort-item">Ожидаемые</div>
     </div>
@@ -39,4 +39,17 @@
 <div class="btn-group pagination">
     @Html.PageLinks(Model.PageInfo, x => Url.Action("Catalog", "Game", new { page = x }))
 </div>
+<script>
+    let catalogitems = document.getElementById('game-sort');
 
+    catalogitems.addEventListener("click", (e) => {
+        if (e.target !== e.currentTarget) {
+            catalogitems.childNodes.forEach( item => {
+                if (item.classList.contains('active')) {
+                    item.classList.remove("active");
+                }
+            })
+            e.target.classList.add("active");
+        }
+});
+</script>

@@ -383,6 +383,9 @@ footer .wrapper2 {
 .game-sort-item:hover {
     border-bottom: 2px solid tomato;
 }
+.active {
+    border-bottom: 2px solid tomato;
+}
 .addgamelink{
    padding: 5px;
    width:150px;
