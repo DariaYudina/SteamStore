@@ -382,6 +382,7 @@ footer .wrapper2 {
 
 .game-sort-item:hover {
     border-bottom: 2px solid tomato;
+    cursor: pointer;
 }
 .active {
     border-bottom: 2px solid tomato;

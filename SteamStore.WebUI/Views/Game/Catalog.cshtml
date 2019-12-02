@@ -40,11 +40,12 @@
     @Html.PageLinks(Model.PageInfo, x => Url.Action("Catalog", "Game", new { page = x }))
 </div>
 <script>
-    let catalogitems = document.getElementById('game-sort');
-
-    catalogitems.addEventListener("click", (e) => {
+    let catalogItemsContainer = document.getElementById('game-sort');
+    let catalogItems = document.querySelectorAll(".game-sort-item");
+    catalogItems[0].classList.add("active");
+    catalogItemsContainer.addEventListener("click", (e) => {
         if (e.target !== e.currentTarget) {
-            catalogitems.childNodes.forEach( item => {
+            catalogItems.forEach( item => {
                 if (item.classList.contains('active')) {
                     item.classList.remove("active");
                 }
