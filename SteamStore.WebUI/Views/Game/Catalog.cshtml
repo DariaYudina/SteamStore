@@ -11,54 +11,44 @@
         <div class="game-sort-item">Новинки</div>
         <div class="game-sort-item">Ожидаемые</div>
     </div>
-    @foreach (var p in @Model.Games)
-    {
-        <a href="@Url.Action("GameProfile","Game", new { id = p.GameId})" class="catalog-item">
-            <div class="catalog-img">
-                @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
-                + p.Image + "\" />")
-            </div>
-            <div class="catalog-name">
-                <span class="game-title">@p.Name</span>
-                <div class="catalog-category">
-                    <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
-                    <p>@p.Category</p>
+    <div class="games-container displayblock">
+        @foreach (var p in @Model.Games)
+        {
+            <a href="@Url.Action("GameProfile","Game", new { id = p.GameId})" class="catalog-item">
+                <div class="catalog-img">
+                    @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
+                         + p.Image + "\" />")
                 </div>
-            </div>
-            <div class="catalog-price"><span>@p.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
-        </a>
-    }
-    @if (User.Identity.IsAuthenticated && @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
-    {
-        <div class="buttoncontainer">
-            <div class="addlinkbutton"> @Html.ActionLink("Добавить игру", "AddGame", "Game", null, new { @class = "addgamelink" })</div>
-
-        </div>
-    }
-</div>
-<div class="catalog-container displaynone">
-    <h2 class="catalogtitle">Игры</h2>
-    <div class="game-sort" id="game-sort">
-        <div class="game-sort-item">Новинки</div>
-        <div class="game-sort-item">Ожидаемые</div>
+                <div class="catalog-name">
+                    <span class="game-title">@p.Name</span>
+                    <div class="catalog-category">
+                        <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
+                        <p>@p.Category</p>
+                    </div>
+                </div>
+                <div class="catalog-price"><span>@p.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+            </a>
+        }
     </div>
-    @foreach (var p in @Model.Games.Take(2))
-    {
-        <a href="@Url.Action("GameProfile","Game", new { id = p.GameId})" class="catalog-item">
-            <div class="catalog-img">
-                @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
-                + p.Image + "\" />")
-            </div>
-            <div class="catalog-name">
-                <span class="game-title">@p.Name</span>
-                <div class="catalog-category">
-                    <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
-                    <p>@p.Category</p>
+    <div class="games-container displaynone">
+        @foreach (var p in @Model.Games.Take(2))
+        {
+            <a href="@Url.Action("GameProfile","Game", new { id = p.GameId})" class="catalog-item">
+                <div class="catalog-img">
+                    @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
+                         + p.Image + "\" />")
                 </div>
-            </div>
-            <div class="catalog-price"><span>@p.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
-        </a>
-    }
+                <div class="catalog-name">
+                    <span class="game-title">@p.Name</span>
+                    <div class="catalog-category">
+                        <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
+                        <p>@p.Category</p>
+                    </div>
+                </div>
+                <div class="catalog-price"><span>@p.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+            </a>
+        }
+    </div>
     @if (User.Identity.IsAuthenticated && @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
     {
         <div class="buttoncontainer">
@@ -73,7 +63,7 @@
 <script>
     let catalogItemsContainer = document.getElementById('game-sort');
     let catalogItems = document.querySelectorAll(".game-sort-item");
-    let catalogs = document.querySelectorAll(".catalog-container");
+    let catalogs = document.querySelectorAll(".games-container");
 
     catalogItems[0].classList.add("active");
     catalogItemsContainer.addEventListener("click", (e) => {
@@ -85,16 +75,14 @@
             })
             e.target.classList.add("active");
             if (catalogItems[0].classList.contains('active')) {
-                if (catalogs[0].classList.contains('displaynone')) { catalogs[0].classList.remove('displaynone') }
-                    catalogs[0].classList.add('displayflex');
-                if (catalogs[1].classList.contains('displayflex')) { catalogs[1].classList.remove('displayflex') }
-                    catalogs[1].classList.add('displaynone');
+                catalogs[0].classList.add("displayblock");
+                catalogs[1].classList.remove("displayblock");
+                catalogs[1].classList.add("displaynone");
             }
             if (catalogItems[1].classList.contains('active')) {
-                if (catalogs[0].classList.contains('displayflex')) { catalogs[0].classList.remove('displayflex') }
-                catalogs[0].classList.add('displaynone');
-                if (catalogs[1].classList.contains('displaynone')) { catalogs[1].classList.remove('displaynone') }
-                catalogs[1].classList.add('displayflex');
+                catalogs[1].classList.add("displayblock");
+                catalogs[0].classList.remove("displayblock");
+                catalogs[0].classList.add("displaynone");
             }
         }
 });
