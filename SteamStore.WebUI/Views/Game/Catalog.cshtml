@@ -65,21 +65,21 @@
     let catalogItems = document.querySelectorAll(".game-sort-item");
     let catalogs = document.querySelectorAll(".games-container");
 
-    catalogItems[0].classList.add("active");
+    catalogItems[0].classList.add("active-tab");
     catalogItemsContainer.addEventListener("click", (e) => {
         if (e.target !== e.currentTarget) {
             catalogItems.forEach( item => {
-                if (item.classList.contains('active')) {
-                    item.classList.remove("active");
+                if (item.classList.contains('active-tab')) {
+                    item.classList.remove("active-tab");
                 }
             })
-            e.target.classList.add("active");
-            if (catalogItems[0].classList.contains('active')) {
+            e.target.classList.add("active-tab");
+            if (catalogItems[0].classList.contains('active-tab')) {
                 catalogs[0].classList.add("displayblock");
                 catalogs[1].classList.remove("displayblock");
                 catalogs[1].classList.add("displaynone");
             }
-            if (catalogItems[1].classList.contains('active')) {
+            if (catalogItems[1].classList.contains('active-tab')) {
                 catalogs[1].classList.add("displayblock");
                 catalogs[0].classList.remove("displayblock");
                 catalogs[0].classList.add("displaynone");

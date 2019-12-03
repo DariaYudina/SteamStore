@@ -384,7 +384,7 @@ footer .wrapper2 {
     border-bottom: 2px solid tomato;
     cursor: pointer;
 }
-.active {
+.active-tab {
     border-bottom: 2px solid tomato;
 }
 .addgamelink{
@@ -875,3 +875,69 @@ img{
 .icon.menu{
     position: relative;
 }
+/* comments*/
+.gamedescription {
+    text-align: justify;
+}
+
+.massagesend {
+    width: 100%;
+    resize: none;
+    min-height: 100px;
+    max-height: 150px;
+    margin-bottom: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
+.addcommentbutton {
+    font-family: inherit;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    background-color: #0094e9;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 8px 16px;
+    color: #fff !important; 
+    width: 150px;
+}
+
+.massagescontainer {
+    margin-top: 20px;
+}
+
+.massagecontainer {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    line-height: 1.6;
+}
+
+.massagename {
+    font-weight: bold;
+    font-size: 14px;
+    padding-bottom: 5px;
+    margin-right: 10px;
+}
+
+.massagetext {
+    text-align: justify;
+}
+
+.messagehead {
+    display: flex;
+    align-items: baseline;
+}
+
+.massagedate {
+    font-size: 12px;
+    color: #8c8c8c;
+    font-weight: 400;
+}
+/* comments*/

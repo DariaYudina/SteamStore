@@ -78,7 +78,6 @@
                     <li class="active"><a data-toggle="tab" href="#panel1">Windows</a></li>
                     <li><a data-toggle="tab" href="#panel2">Mac</a></li>
                 </ul>
-
                 <div class="tab-content">
                     <div id="panel1" class="tab-pane fade in active">
                         <div class="tab-item">
@@ -146,7 +145,28 @@
                         <p class="out">Войти</p>
                     }
                 </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora sunt, cum rem tempore autem assumenda commodi voluptate laudantium? Inventore hic reprehenderit modi rem, quis omnis voluptatem doloribus nulla repudiandae reiciendis.</p>
+                <form name="comment" action="#" method="post">
+                    <p>
+                        <textarea name="text_comment" cols="10" rows="20" class="massagesend" placeholder="Напишете ваш комментарий..."></textarea>
+                    </p>
+                    <p>
+                        <input type="hidden" name="page_id" value="150" />
+                        <a href="#" class="addcommentbutton">Опубликовать</a>
+                    </p>
+                </form>
+                <div class="massagescontainer">
+                    <div class="massagecontainer">
+                        <div class="messagehead">
+                            <p class="massagename">John Snow</p>
+                            <p class="massagedate">вчера, в 22:26</p>
+                        </div>
+                        <p class="massagetext">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda adipisci, amet facilis doloribus quaerat voluptates officiis sapiente, animi quam, consequuntur odit delectus. Maxime, aliquam quis voluptatum mollitia repellendus explicabo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio suscipit odio illum nisi dolore minus dolores sapiente sit? Fugiat atque reiciendis enim laborum ullam officia esse omnis molestias non mollitia!</p>
+                    </div>
+                    <div class="massagecontainer">
+                        <p class="massagename">John Snow</p>
+                        <p class="massagetext">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda adipisci, amet facilis doloribus quaerat voluptates officiis sapiente, animi quam, consequuntur odit delectus. Maxime, aliquam quis voluptatum mollitia repellendus explicabo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio suscipit odio illum nisi dolore minus dolores sapiente sit? Fugiat atque reiciendis enim laborum ullam officia esse omnis molestias non mollitia!</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -161,7 +181,6 @@
         let item = {};
         if (getCookie("CartProducts")) {
             let arr = JSON.parse(getCookie("CartProducts"));
-            console.log(arr);
             if (arr.some(i => i.id === productID)) {
                 arr.forEach(i => {
                     if (i.id === productID) {

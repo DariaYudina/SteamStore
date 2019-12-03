@@ -8,7 +8,7 @@
     <p class="ordertitle">Оформление заказа</p>
     @foreach (var item in Model)
     {
-        <a href="@Url.Action(" GameProfile","Game", new { id=item.Game.GameId})" class="catalog-item order">
+        <a href="#" class="catalog-item order">
             <div class="catalog-img">
                 @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
                                 + item.Game.Image + "\" />")

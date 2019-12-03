@@ -22,8 +22,9 @@ namespace SteamStore.WebUI.Controllers
         public ActionResult MyCart()
         {
            
-            if (HttpContext.Request.Cookies.Count != 0)
+            if (HttpContext.Request.Cookies.AllKeys.Any(key => key.Equals("CartProducts")))
             {
+               
                 var cartItems = JsonConvert.DeserializeObject<CookieItemModel[]>(HttpUtility.UrlDecode(HttpContext.Request.Cookies["CartProducts"].Value));
                 foreach (var item in cartItems)
                 {
