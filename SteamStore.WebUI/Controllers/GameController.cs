@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Newtonsoft.Json;
 using SteamStore.AbstractBLL;
 using SteamStore.WebUI.Models;
 using System;
@@ -85,8 +86,15 @@ namespace SteamStore.WebUI.Controllers
         [HttpPost]
         public ActionResult _GameCommentPartial()
         {
+            Stream req = Request.InputStream;
+            req.Seek(0, System.IO.SeekOrigin.Begin);
+            string json = new StreamReader(req).ReadToEnd();
 
-            return PartialView("_GameCommentPartial");
+            // TODO: добавление комментария в базу (надо ещё одну модель сделать и уже её отсылать обратно),
+            // сделать нормальную дату, а то сейчас так /Date(1575464649011)/
+
+            var value = JsonConvert.DeserializeObject<AddCommentModel>(json);
+            return Json(new { author = User.Identity.Name, date = DateTime.Now, text = value.value });
         }
     }
 }

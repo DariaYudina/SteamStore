@@ -17,24 +17,26 @@
         }
         @if (!User.Identity.IsAuthenticated)
         {
-            <a href="#" class="addcommentbuttondesable" id="errormassegecomment">Опубликовать</a>
-            <div class="editor-field displaynone" id="commenterror">
-                <p class="validation-summary-errors" >Войдите, чтобы отправить комментарий</p>
+            <div class="editor-field" id="commenterror">
+                <p class="validation-summary-errors" >Войдите, чтобы оставить комментарий</p>
             </div>
         }
     </p>
         
 </form>
-<div class="massagescontainer">
+<div class="massagescontainer" id="massagescontainer">
     <div class="massagecontainer">
         <div class="messagehead">
-            <p class="massagename">John Snow</p>
+            <p class="massagename">John Snow1</p>
             <p class="massagedate">вчера, в 22:26</p>
         </div>
         <p class="massagetext">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda adipisci, amet facilis doloribus quaerat voluptates officiis sapiente, animi quam, consequuntur odit delectus. Maxime, aliquam quis voluptatum mollitia repellendus explicabo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio suscipit odio illum nisi dolore minus dolores sapiente sit? Fugiat atque reiciendis enim laborum ullam officia esse omnis molestias non mollitia!</p>
     </div>
     <div class="massagecontainer">
-        <p class="massagename">John Snow</p>
+        <div class="messagehead">
+            <p class="massagename">John Snow2</p>
+            <p class="massagedate">вчера, в 22:26</p>
+        </div>
         <p class="massagetext">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda adipisci, amet facilis doloribus quaerat voluptates officiis sapiente, animi quam, consequuntur odit delectus. Maxime, aliquam quis voluptatum mollitia repellendus explicabo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio suscipit odio illum nisi dolore minus dolores sapiente sit? Fugiat atque reiciendis enim laborum ullam officia esse omnis molestias non mollitia!</p>
     </div>
 </div>
@@ -42,29 +44,32 @@
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 <script>
 
-    let submiterror = document.getElementById("errormassegecomment");
-    let errormassage = document.getElementById("commenterror");
-    submiterror.addEventListener("click", () => {
-        errormassage.classList.remove('displaynone');
-        errormassage.classList.add('displayblock');
-    });
+    let submitcomment = document.getElementById("submitcomment");
+    let textcomment = document.getElementById("textcomment");
+    let massagescontainer = document.getElementById("massagescontainer");
 
-        @*$(document).ready(function () {
-    $('#submitcomment').click(function (e) {
+    submitcomment.addEventListener("click", (e) => {
         e.preventDefault();
-        let text = $('#textcomment').val();
-        name=encodeURIComponent(name);
-        $('#results').load('@Url.Action("BookSearch", "Home")?name='+name)
-    });
-});*@
 
-    $(document).ready(function () {
         $.ajax({
-          url: @Url.Action("Test","Home"),
-          success: function(){
-            alert('Load was performed.');
-          }
-        });
-    });
+            url: "@Url.Action("_GameCommentPartial", "Game")",
+            type: "POST",
+            data: JSON.stringify({ value: textcomment.value }),
+            contentType: "application/json",
+            success: (data) => {
+                massagescontainer.insertAdjacentHTML("beforeend",
+                    `<div class="massagecontainer">
+                        <div class="messagehead">
+                            <p class="massagename">${data.author}</p>
+                            <p class="massagedate">${data.date}</p>
+                        </div>
+                        <p class="massagetext">${data.text}</p>
+                    </div>
+                    `
+                );
+                textcomment.value = "";
+            }
+        })
+    })
 
 </script>
