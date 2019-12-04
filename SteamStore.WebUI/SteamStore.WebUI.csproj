@@ -169,6 +169,7 @@
     <Compile Include="Models\CookieItemModel.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\MyUserProvider.cs" />
+    <Compile Include="Models\AddCommentModel.cs" />
     <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Models\SigninModel.cs" />
     <Compile Include="Models\SignupModel.cs" />
