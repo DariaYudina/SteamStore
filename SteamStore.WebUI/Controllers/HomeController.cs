@@ -20,6 +20,10 @@ namespace SteamStore.WebUI.Controllers
         {
             return View(_gameLogic.GetGames().Take(5));
         }
-
+       
+        public ActionResult Test()
+        {
+            return PartialView("_GameCommentPartial", null);
+        }
     }
 }

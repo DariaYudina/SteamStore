@@ -75,5 +75,18 @@ namespace SteamStore.WebUI.Controllers
             return View(_gameLogic.GetGame(id));
 
         }
+        [HttpGet]
+        public ActionResult _GameCommentPartial(int id)
+        {
+            ViewBag.id = id;
+            return PartialView("_GameCommentPartial");
+        }
+
+        [HttpPost]
+        public ActionResult _GameCommentPartial()
+        {
+
+            return PartialView("_GameCommentPartial");
+        }
     }
 }

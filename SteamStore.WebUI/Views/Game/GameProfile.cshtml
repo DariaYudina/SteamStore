@@ -4,19 +4,19 @@
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Game profile";
 }
-    <div class="background-image">
-        <a href="#">
-            @Html.Raw("<img class='background-img' src=\"data:image/jpeg;base64,"
-      + @Model.BackgroundImage + "\" />")
-        </a>
-    </div>
+<div class="background-image">
+    <a href="#">
+        @Html.Raw("<img class='background-img' src=\"data:image/jpeg;base64,"
+  + @Model.BackgroundImage + "\" />")
+    </a>
+</div>
 <div class="gameprofile-container">
     <h1 class="gametitle">@Model.Name</h1>
     <div class="gameProfileItem">
         <div class="gameprofile-left">
             <div class="profileimage">
                 <a href="#">
-                   @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"+ @Model.ProfileImage + "\" />")
+                    @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64," + @Model.ProfileImage + "\" />")
                 </a>
             </div>
             <div class="gameprofiletextcontainer">
@@ -49,8 +49,8 @@
                     <div class="price">@Model.Price.ToString("#.##") <span class="rub">руб.</span></div>
                     <div class="buttoncontainer">
                         @Html.ActionLink("Купить", "OrderForm", "Order", new { @id = Model.GameId }, new { @class = "buy" })
-                     
-                        <a href="#" id ="addtocart" data-gameId = "@Model.GameId" class="addtocart">
+
+                        <a href="#" id="addtocart" data-gameId="@Model.GameId" class="addtocart">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="31" height="20" viewBox="0 0 37.438 26.646">
                                 <path fill="none" stroke="white" stroke-width="2"
@@ -70,7 +70,7 @@
             </div>
             <div class="gameprofile-right-item">
                 <p class="blocktitle">Описание</p>
-                <p>@Model.Description</p>
+                <p class="gamedescription">@Model.Description</p>
             </div>
             <div class="gameprofile-right-item">
                 <p class="blocktitle">Минимальные системные требования</p>
@@ -138,39 +138,13 @@
                 </div>
             </div>
             <div class="gameprofile-right-item">
-                <div class="comment">
-                    <p class="blocktitle">Комментарии</p>
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <p class="out">Войти</p>
-                    }
-                </div>
-                <form name="comment" action="#" method="post">
-                    <p>
-                        <textarea name="text_comment" cols="10" rows="20" class="massagesend" placeholder="Напишете ваш комментарий..."></textarea>
-                    </p>
-                    <p>
-                        <input type="hidden" name="page_id" value="150" />
-                        <a href="#" class="addcommentbutton">Опубликовать</a>
-                    </p>
-                </form>
-                <div class="massagescontainer">
-                    <div class="massagecontainer">
-                        <div class="messagehead">
-                            <p class="massagename">John Snow</p>
-                            <p class="massagedate">вчера, в 22:26</p>
-                        </div>
-                        <p class="massagetext">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda adipisci, amet facilis doloribus quaerat voluptates officiis sapiente, animi quam, consequuntur odit delectus. Maxime, aliquam quis voluptatum mollitia repellendus explicabo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio suscipit odio illum nisi dolore minus dolores sapiente sit? Fugiat atque reiciendis enim laborum ullam officia esse omnis molestias non mollitia!</p>
-                    </div>
-                    <div class="massagecontainer">
-                        <p class="massagename">John Snow</p>
-                        <p class="massagetext">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda adipisci, amet facilis doloribus quaerat voluptates officiis sapiente, animi quam, consequuntur odit delectus. Maxime, aliquam quis voluptatum mollitia repellendus explicabo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio suscipit odio illum nisi dolore minus dolores sapiente sit? Fugiat atque reiciendis enim laborum ullam officia esse omnis molestias non mollitia!</p>
-                    </div>
-                </div>
+
+                @Html.Action("_GameCommentPartial", "Game", new { id = Model.GameId })
             </div>
         </div>
     </div>
 </div>
+<script src="~/Scripts/workWithCookie.js" type="text/javascript"></script>
 <script>
     let buybutton = document.getElementById("addtocart");
     buybutton.addEventListener("click", () => {
@@ -200,32 +174,10 @@
         let arrID = [];
     });
 
-    function getCookie(name) {
-        let matches = document.cookie.match(new RegExp(
-            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-        ))
-        return matches ? decodeURIComponent(matches[1]) : undefined
-    }
-    function setCookie(name, value, props) {
-        props = props || {};
-        let exp = props.expires;
-        if (typeof exp == "number" && exp) {
-            let d = new Date();
-            d.setTime(d.getTime() + exp * 1000);
-            exp = props.expires = d;
-        }
-        if(exp && exp.toUTCString) { props.expires = exp.toUTCString() }
-        value = encodeURIComponent(value);
-        let updatedCookie = name + "=" + value + ";path=/";
-
-        for(let propName in props){
-            updatedCookie += "; " + propName;
-            let propValue = props[propName];
-            if (propValue !== true) { updatedCookie += "=" + propValue };
-        }
-        document.cookie = updatedCookie;
-    }
-    function deleteCookie(name) {
-        setCookie(name, null, { expires: -1 })
-    }
+    //$.ajax({
+    //    url: 'Home/test.html',
+    //    success: function () {
+    //        alert('Load was performed.');
+    //    }
+    //});
 </script>
