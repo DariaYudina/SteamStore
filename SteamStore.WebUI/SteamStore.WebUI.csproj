@@ -204,6 +204,7 @@
     <Content Include="Views\Order\OrdersForm.cshtml" />
     <Content Include="Views\Order\OrdersFormPartial.cshtml" />
     <Content Include="Views\Game\_GameCommentPartial.cshtml" />
+    <Content Include="Views\Game\GameSearch.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

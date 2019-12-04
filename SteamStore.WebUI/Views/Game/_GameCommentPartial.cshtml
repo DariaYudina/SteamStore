@@ -1,4 +1,17 @@
-﻿<div class="comment">
+﻿<input type="text" name="name" id="search" />
+<input type='button' id="submit" value='Поиск' />
+<div id="results"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#submit').click(function (e) {
+            e.preventDefault();
+            var name = $('#search').val();
+            name=encodeURIComponent(name);
+            $('#results').load('@Url.Action("GameSearch", "Home")?name='+name)
+        });
+    });
+</script>
+<div class="comment">
     <p class="blocktitle">Комментарии</p>
     @if (!User.Identity.IsAuthenticated)
     {
@@ -19,28 +32,28 @@
         {
             <a href="#" class="addcommentbuttondesable" id="errormassegecomment">Опубликовать</a>
             <div class="editor-field displaynone" id="commenterror">
-                <p class="validation-summary-errors" >Войдите, чтобы отправить комментарий</p>
-            </div>
-        }
-    </p>
-        
-</form>
-<div class="massagescontainer">
-    <div class="massagecontainer">
-        <div class="messagehead">
-            <p class="massagename">John Snow</p>
-            <p class="massagedate">вчера, в 22:26</p>
+        <p class="validation-summary-errors">Войдите, чтобы отправить комментарий</p>
         </div>
-        <p class="massagetext">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda adipisci, amet facilis doloribus quaerat voluptates officiis sapiente, animi quam, consequuntur odit delectus. Maxime, aliquam quis voluptatum mollitia repellendus explicabo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio suscipit odio illum nisi dolore minus dolores sapiente sit? Fugiat atque reiciendis enim laborum ullam officia esse omnis molestias non mollitia!</p>
+    }
+        </p>
+
+    </form>
+    <div class="massagescontainer">
+        <div class="massagecontainer">
+            <div class="messagehead">
+                <p class="massagename">John Snow</p>
+                <p class="massagedate">вчера, в 22:26</p>
+            </div>
+            <p class="massagetext">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda adipisci, amet facilis doloribus quaerat voluptates officiis sapiente, animi quam, consequuntur odit delectus. Maxime, aliquam quis voluptatum mollitia repellendus explicabo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio suscipit odio illum nisi dolore minus dolores sapiente sit? Fugiat atque reiciendis enim laborum ullam officia esse omnis molestias non mollitia!</p>
+        </div>
+        <div class="massagecontainer">
+            <p class="massagename">John Snow</p>
+            <p class="massagetext">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda adipisci, amet facilis doloribus quaerat voluptates officiis sapiente, animi quam, consequuntur odit delectus. Maxime, aliquam quis voluptatum mollitia repellendus explicabo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio suscipit odio illum nisi dolore minus dolores sapiente sit? Fugiat atque reiciendis enim laborum ullam officia esse omnis molestias non mollitia!</p>
+        </div>
     </div>
-    <div class="massagecontainer">
-        <p class="massagename">John Snow</p>
-        <p class="massagetext">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda adipisci, amet facilis doloribus quaerat voluptates officiis sapiente, animi quam, consequuntur odit delectus. Maxime, aliquam quis voluptatum mollitia repellendus explicabo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio suscipit odio illum nisi dolore minus dolores sapiente sit? Fugiat atque reiciendis enim laborum ullam officia esse omnis molestias non mollitia!</p>
-    </div>
-</div>
-<script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
-<script>
+    <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+    <script>
 
     let submiterror = document.getElementById("errormassegecomment");
     let errormassage = document.getElementById("commenterror");
@@ -58,13 +71,13 @@
     });
 });*@
 
-    $(document).ready(function () {
+    @*$(document).ready(function () {
         $.ajax({
           url: @Url.Action("Test","Home"),
           success: function(){
             alert('Load was performed.');
           }
         });
-    });
+    });*@
 
-</script>
+    </script>
