@@ -12,11 +12,9 @@ namespace Entities
         public int FeedbackId { get; set; }
 
         public int? UserId { get; set; }
-
+        public int? GameId { get; set; }
         public string Text { get; set; }
-
-        public int? Opinion { get; set; }
-
+        public virtual Game Game { get; set; }
         public virtual User User { get; set; }
     }
 }

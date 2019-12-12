@@ -66,7 +66,6 @@ namespace Entities
                 price = value;
             }
         }
-
         public string Image { get; set; }
         public string ProfileImage { get; set; }
         public string BackgroundImage { get; set; }

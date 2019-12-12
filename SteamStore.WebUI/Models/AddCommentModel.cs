@@ -8,5 +8,6 @@ namespace SteamStore.WebUI.Models
     public class AddCommentModel
     {
         public string value { get; set; }
+        public int gameid { get; set; }
     }
 }

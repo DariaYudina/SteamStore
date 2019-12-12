@@ -25,10 +25,5 @@ namespace SteamStore.WebUI.Controllers
         {
             return PartialView("_GameCommentPartial", null);
         }
-        public ActionResult GameSearch(string name)
-        {
-            var allgames = _gameLogic.GetGames().Where(g => g.Contains(name)).ToList();
-            return PartialView(allgames);
-        }
     }
 }

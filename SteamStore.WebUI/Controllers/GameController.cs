@@ -94,7 +94,8 @@ namespace SteamStore.WebUI.Controllers
             // сделать нормальную дату, а то сейчас так /Date(1575464649011)/
 
             var value = JsonConvert.DeserializeObject<AddCommentModel>(json);
-            return Json(new { author = User.Identity.Name, date = DateTime.Now, text = value.value });
+            var gameId = JsonConvert.DeserializeObject<AddCommentModel>(json);
+            return Json(new { author = User.Identity.Name, date = DateTime.Now.ToString(), text = value.value });
         }
     }
 }

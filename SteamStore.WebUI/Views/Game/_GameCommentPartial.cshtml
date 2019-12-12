@@ -47,29 +47,37 @@
     let submitcomment = document.getElementById("submitcomment");
     let textcomment = document.getElementById("textcomment");
     let massagescontainer = document.getElementById("massagescontainer");
+    textcomment.addEventListener("change", () => {
+        if (isEmpty(textcomment.value)) {
 
+        }
+    })
     submitcomment.addEventListener("click", (e) => {
         e.preventDefault();
-
-        $.ajax({
-            url: "@Url.Action("_GameCommentPartial", "Game")",
-            type: "POST",
-            data: JSON.stringify({ value: textcomment.value }),
-            contentType: "application/json",
-            success: (data) => {
-                massagescontainer.insertAdjacentHTML("beforeend",
-                    `<div class="massagecontainer">
-                        <div class="messagehead">
-                            <p class="massagename">${data.author}</p>
-                            <p class="massagedate">${data.date}</p>
+            $.ajax({
+                url: "@Url.Action("_GameCommentPartial", "Game")",
+                type: "POST",
+                data: JSON.stringify({ value: textcomment.value, gameId: @ViewBag.id }),
+                contentType: "application/json",
+                success: (data) => {
+                    massagescontainer.insertAdjacentHTML("beforeend",
+                        `<div class="massagecontainer">
+                            <div class="messagehead">
+                                <p class="massagename">${data.author}</p>
+                                <p class="massagedate">${data.date}</p>
+                            </div>
+                            <p class="massagetext">${data.text}</p>
                         </div>
-                        <p class="massagetext">${data.text}</p>
-                    </div>
-                    `
-                );
-                textcomment.value = "";
-            }
-        })
+                        `
+                    );
+                    textcomment.value = "";
+                },
+            })
+        } 
     })
-
+    function isEmpty(str) {
+        if (str.trim() == '')
+            return true;
+        return false;
+    }
 </script>
