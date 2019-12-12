@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IFeedBackDAL.cs" />
     <Compile Include="IGameDAL.cs" />
     <Compile Include="IOrderDAL.cs" />
     <Compile Include="IUserDAL.cs" />

@@ -8,6 +8,14 @@ namespace Entities
 
     public partial class Feedback
     {
+        public Feedback() { }
+        public Feedback(int userId, int gameId, string text, DateTime date) : this()
+        {
+            UserId = userId;
+            GameId = gameId;
+            Text = text;
+            DateComment = date;
+        }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int FeedbackId { get; set; }
 
@@ -16,5 +24,6 @@ namespace Entities
         public string Text { get; set; }
         public virtual Game Game { get; set; }
         public virtual User User { get; set; }
+        public DateTime DateComment { get; set; }
     }
 }

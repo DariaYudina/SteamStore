@@ -32,6 +32,10 @@
                         {
                             @Html.ActionLink("Мои покупки", "MyOrders", "Order", null, new { @class = "active-small" })
                         }
+                        @if (User.Identity.IsAuthenticated && @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
+                        {
+                            @Html.ActionLink("Статистика сайта", "MyOrders", "Order", null, new { @class = "active-small" })
+                        }
                     </div>
                     <div class="icon-wrapper">
                         @*<a href="#" class="icon menu">

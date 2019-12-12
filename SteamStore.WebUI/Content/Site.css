@@ -90,7 +90,7 @@ button:focus {
 .menu-wrapper {
     display: flex;
     height: 100%;
-    width: 65%;
+    width: 70%;
 }
 .menu-wrapper a {
     margin-right: 15px;
@@ -404,6 +404,9 @@ footer .wrapper2 {
     margin: 0;
 }
 /*Catalog*/
+.games-container.displayblock {
+    width:100%;
+}
 .login {
     overflow: hidden;
     text-overflow: ellipsis;

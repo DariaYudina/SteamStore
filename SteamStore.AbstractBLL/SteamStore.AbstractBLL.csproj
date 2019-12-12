@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IGameBLL.cs" />
+    <Compile Include="IFeedBackBLL.cs" />
     <Compile Include="IOrderBLL.cs" />
     <Compile Include="IUserBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

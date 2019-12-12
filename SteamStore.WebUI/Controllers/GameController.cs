@@ -14,9 +14,13 @@ namespace SteamStore.WebUI.Controllers
     public class GameController : Controller
     {
         public IGameBLL _gameLogic;
-        public GameController(IGameBLL gameLogic)
+        public IFeedBackBLL _feedbackLogic;
+        public IUserBLL _userBLL;
+        public GameController(IGameBLL gameLogic, IFeedBackBLL feedbackLogic, IUserBLL userBLL)
         {
             _gameLogic = gameLogic;
+            _feedbackLogic = feedbackLogic;
+            _userBLL = userBLL;
         }
         [HttpGet]
         public ActionResult Catalog(int page = 1)
@@ -90,12 +94,11 @@ namespace SteamStore.WebUI.Controllers
             req.Seek(0, System.IO.SeekOrigin.Begin);
             string json = new StreamReader(req).ReadToEnd();
 
-            // TODO: добавление комментария в базу (надо ещё одну модель сделать и уже её отсылать обратно),
-            // сделать нормальную дату, а то сейчас так /Date(1575464649011)/
-
-            var value = JsonConvert.DeserializeObject<AddCommentModel>(json);
-            var gameId = JsonConvert.DeserializeObject<AddCommentModel>(json);
-            return Json(new { author = User.Identity.Name, date = DateTime.Now.ToString(), text = value.value });
+            var jsoncomment = JsonConvert.DeserializeObject<AddCommentModel>(json);
+            var datetime = DateTime.Now;
+            var userId = _userBLL.GetUsers().FirstOrDefault(u => u.Login == User.Identity.Name).UserId;
+            _feedbackLogic.AddFeedback(userId, jsoncomment.gameid, jsoncomment.value, datetime);
+            return Json(new { author = User.Identity.Name, date = datetime.ToString(), text = jsoncomment.value });
         }
     }
 }
