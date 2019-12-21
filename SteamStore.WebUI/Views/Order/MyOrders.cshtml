@@ -1,8 +1,40 @@
 ﻿@using Entities;
+@model  IList<Order>
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "My orders";
 }
-<div class="myorders displayflex">
-    <span>У вас пока нет покупок</span>
+<h2 class="catalogtitle cart">Ваши Покупки</h2>
+@if (Model.Count == 0)
+{
+    <div class="myorders displayflex">
+        <span>У вас пока нет покупок</span>
+    </div>
+}
+else
+{
+<div class="catalog-container displayflex">
+    @foreach (var order in Model)
+    {
+        <a href="@Url.Action("GameProfile","Game", new { id = order.GameId})" class="catalog-item myorder">
+            <div class="catalog-img">
+                @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
+                     + order.Game.Image + "\" />")
+            </div>
+            <div class="catalog-name">
+                <span class="game-title">@order.Game.Name</span>
+                <div class="catalog-category">
+                    <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
+                    <p>@order.Game.Category</p>
+                </div>
+            </div>
+            <div class="catalog-price"><span>@order.Game.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+        </a>
+        <div class="ordercharacter">
+            <p>@order.OrderQuantity шт.</p>
+            <p>Общая стоимость: @order.OrderPrice руб.</p>
+        </div>
+    }
 </div>
+
+}

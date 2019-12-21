@@ -13,11 +13,11 @@
 </div>
 <div class="main-container main">
     <div class="catalog-container main">
-        <h3>Игры</h3>
-        <div class="game-sort main" id="game-sort-main">
+        <h3>Популярные</h3>
+        @*<div class="game-sort main" id="game-sort-main">
             <div class="game-sort-item">Новинки</div>
             <div class="game-sort-item">Ожидаемые</div>
-        </div>
+        </div>*@
 
             @foreach (var g in @Model)
             {
@@ -30,7 +30,7 @@
                         <span>@g.Name</span>
                         <div class="catalog-category">
                             <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
-                            <span>@g.Producer</span>
+                            <span>@g.Category</span>
                         </div>
                     </div>
                     <div class="catalog-price"><span>@g.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
@@ -40,10 +40,10 @@
     </div>
     <div class="catalog-container main discount">
         <h3>Скидки</h3>
-        <div class="game-sort main">
+        @*<div class="game-sort main">
             <div class="game-sort-item">Новинки</div>
             <div class="game-sort-item">Ожидаемые</div>
-        </div>
+        </div>*@
         @foreach (var g in @Model)
         {
             <a href="@Url.Action("GameProfile","Game", new { id = g.GameId})" class="catalog-item main">
@@ -55,7 +55,7 @@
                     <span>@g.Name</span>
                     <div class="catalog-category">
                         <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
-                        <span>@g.Producer</span>
+                        <span>@g.Category</span>
                     </div>
                 </div>
                 <div class="catalog-price"><span>@g.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>

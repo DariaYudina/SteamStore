@@ -493,7 +493,7 @@ input[type="file"] {
 
 .background-image {
     width: 100vw;
-    height: 500px;
+    height: 600px;
     background-image: url(images/background.jpg); 
     background-repeat: no-repeat;
     filter: brightness(0.7);
@@ -502,7 +502,7 @@ input[type="file"] {
 }
 .background-img {
     width: 100vw;
-    height: 500px;
+    height: 600px;
     object-fit: cover;
     filter: brightness(0.7);
 }
@@ -720,7 +720,7 @@ input[type="file"] {
 /* main page */
 .main-background-image {
     width: 100vw;
-    height: 400px;
+    height: 600px;
     background-image: url(images/mainbackground1.png);
     background-repeat: no-repeat;
     filter: brightness(0.6);
@@ -761,7 +761,7 @@ input[type="file"] {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: absolute;
-    top: 65%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -956,3 +956,12 @@ img{
     font-weight: 400;
 }
 /* comments*/
+/* my orders*/
+.ordercharacter{
+    background-color: white;
+    width: 100%;
+    padding: 10px;
+}
+.catalog-item.myorder{
+    margin-top: 10px;
+}
