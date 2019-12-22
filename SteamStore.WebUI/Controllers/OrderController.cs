@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Entities;
+using Newtonsoft.Json;
 using SteamStore.AbstractBLL;
 using SteamStore.WebUI.Models;
 using System;
@@ -216,13 +217,19 @@ namespace SteamStore.WebUI.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return View();
+                User user = _userLogic.GetUsers().FirstOrDefault(u => u.Login == User.Identity.Name);
+                var orders = _orderLogic.GetOrders().Where(order => order.UserId == user.UserId).ToList();
+                foreach (var order in orders)
+                {
+                    Game game = _gameLogic.GetGame((int)order.GameId);
+                    order.Game = game;
+                }
+                return View(orders);
             }
             else
             {
                 return HttpNotFound();
             }
-
         }
     }
 }
