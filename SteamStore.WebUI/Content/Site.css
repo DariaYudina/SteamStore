@@ -1127,6 +1127,11 @@ img{
 .price-value input {
     width: 50px;
 }
+
+.controll-game {
+    display: flex;
+}
+
 .statist{
     margin-top: 30px;
     background-color: white;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,13 +17,14 @@ namespace SteamStore.WebUI.Models
         public string Name { get; set; }
         [Required]
         public decimal Price { get; set; }
+        [Required]
+        public decimal Discount { get; set; }
         public string Image { get; set; }
         [Required]
         [StringLength(2000,MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 2000 символов")]
         public string Description { get; set; }
         [Required]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 100 символов")]
-        public string Category { get; set; }
+        public Category Category { get; set; }
         [Required]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 100 символов")]
         public string Producer { get; set; }

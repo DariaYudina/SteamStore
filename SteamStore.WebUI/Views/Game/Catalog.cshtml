@@ -86,17 +86,17 @@
         <div style="margin-bottom: 20px">
             <label class="custom-checkbox">
                 Экшены
-                <input type="checkbox">
+                <input type="checkbox" data-value="1">
                 <span class="chckmark"></span>
             </label>
             <label class="custom-checkbox">
                 Стратегии
-                <input type="checkbox" id="chk1">
+                <input type="checkbox" data-value="2">
                 <span class="chckmark"></span>
             </label>
             <label class="custom-checkbox">
                 RPG
-                <input type="checkbox">
+                <input type="checkbox" data-value="3">
                 <span class="chckmark"></span>
             </label>
         </div>
@@ -198,6 +198,49 @@
     })
     const filterBtn = document.querySelector("#filter-btn");
     filterBtn.addEventListener("click", () => {
-        console.log(document.querySelector("#chk1").checked);
+        const checkBoxes = document.querySelectorAll(".custom-checkbox input");
+        let categories = [];
+        checkBoxes.forEach(chk => {
+            if (chk.checked) {
+                categories.push(+chk.getAttribute("data-value"));
+            }
+        })
+        const priceFrom = document.getElementById("from").value;
+        const priceTo = document.getElementById("to").value;
+        $.ajax({
+            url: `@Url.Action("GamesFilter", "Game")`,
+            type: "POST",
+            data: JSON.stringify({ Categories: categories, PriceFrom: priceFrom, PriceTo: priceTo }),
+            contentType: "application/json",
+            success: (data) => {
+                let resultString = '';
+                const gamesContainer = document.querySelector(".games-container");
+                for (let game of data) {
+                    resultString += `
+                        <a href=@Url.Action("GameProfile","Game")/${game.GameId} class="catalog-item">
+                <div class="catalog-img">
+                   <img class='gamesimg' src=\"data:image/jpeg;base64,${game.Image}\" />
+                </div>
+                <div class="catalog-name">
+                    <span class="game-title">${game.Name}</span>
+                    <div class="catalog-category">
+                        <img src="../../Content/images/game-category.png" alt="gamecategory" class="gamecategory">
+                        <p>${game.Category}</p>
+                    </div>
+                </div>
+                <div class="price-container">
+                    ${game.Discount != 0 ? `<div class="catalog-price"><s>${game.Price}</s><img src="~/Content/images/rub.png" alt="rub"></div>
+                        <div class="catalog-price"><span>${((game.Price - (game.Price / 100 * game.Discount)))}</span><img src="../../Content/images/rub.png" alt="rub"></div>`
+                        : `<div class="catalog-price"><span>${game.Price}</span><img src="../../Content/images/rub.png" alt="rub"></div>`}
+                </div>
+            </a>
+                    `
+                }
+                gamesContainer.innerHTML = resultString;
+                priceFrom.value = '';
+                priceTo.value = '';
+                checkBoxes.forEach(chk => chk.checked = false);
+            }
+        })
     })
 </script>

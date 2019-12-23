@@ -13,10 +13,7 @@
         <div class="editor-field">
             @Html.ValidationMessageFor(model => model.Name)
         </div>
-        @Html.TextBox("Category", "", new { @placeholder = "Введите жанр игры", @class = "forminput" })
-        <div class="editor-field">
-            @Html.ValidationMessageFor(model => model.Category)
-        </div>
+        @Html.DropDownListFor(m => Model.Category.CategoryId, ViewBag.Categories as SelectList, new { @class = "forminput" })
 
         @Html.TextBox("Producer", "", new { @placeholder = "Введите производителя игры", @class = "forminput" })
         <div class="editor-field">
@@ -27,21 +24,25 @@
         <div class="editor-field">
             @Html.ValidationMessageFor(model => model.Price)
         </div>
+        @Html.TextBoxFor(m => m.Discount, new { @type = "number", @min = "0", @placeholder = "Введите скидку", @class = "forminput" })
+        <div class="editor-field">
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
         <textarea id="txtInput" name="Description" class="addgametextarea" placeholder="Введите описание игры..."></textarea>
         <label for="file-upload" class="custom-file-upload">
             <i class="fa fa-cloud-upload"></i> Загрузите обложку
         </label>
-       // @Html.TextBoxFor(i => i.Image, new { @type = "file", @class = "forminput", @id = "file-upload" })
-        <input type="file" name="images" id = "file-upload" class = "forminput"/>
+        // @Html.TextBoxFor(i => i.Image, new { @type = "file", @class = "forminput", @id = "file-upload" })
+        <input type="file" name="images" id="file-upload" class="forminput" />
         <label for="file-upload2" class="custom-file-upload">
             <i class="fa fa-cloud-upload"></i> Загрузите обложку для профайла
         </label>
-       // @Html.TextBoxFor(i => i.ProfileImage, new { @type = "file", @class = "forminput", @id = "file-upload2" })
+        // @Html.TextBoxFor(i => i.ProfileImage, new { @type = "file", @class = "forminput", @id = "file-upload2" })
         <input type="file" name="images" id="file-upload2" class="forminput" />
         <label for="file-upload3" class="custom-file-upload">
-            <i class="fa fa-cloud-upload"></i> Загрузите обложку для фона 
+            <i class="fa fa-cloud-upload"></i> Загрузите обложку для фона
         </label>
-       // @Html.TextBoxFor(i => i.BackgroundImage, new { @type = "file", @class = "forminput", @id = "file-upload3" })
+        // @Html.TextBoxFor(i => i.BackgroundImage, new { @type = "file", @class = "forminput", @id = "file-upload3" })
         <input type="file" name="images" id="file-upload3" class="forminput" />
         <p><input type="submit" value="Add Game" class="addgamebutton" /></p>
     }

@@ -16,6 +16,7 @@ namespace SteamStore.WebUI.Controllers
         public IGameBLL _gameLogic;
         public IFeedBackBLL _feedbackLogic;
         public IUserBLL _userBLL;
+        public static int _gameId;
         public GameController(IGameBLL gameLogic, IFeedBackBLL feedbackLogic, IUserBLL userBLL)
         {
             _gameLogic = gameLogic;
@@ -35,11 +36,15 @@ namespace SteamStore.WebUI.Controllers
         [HttpGet]
         public ActionResult AddGame()
         {
+            SelectList categories = new SelectList(_gameLogic.GetCategories(), "CategoryId", "CategoryName");
+            ViewBag.Categories = categories;
             return View();
         }
         [HttpPost]
         public ActionResult AddGame(AddGameModel addGameModel, IList<HttpPostedFileBase> images)
         {
+            SelectList categories = new SelectList(_gameLogic.GetCategories(), "CategoryId", "CategoryName");
+            ViewBag.Categories = categories;
             var imageslist = images.ToList();
             string[] gameimages = new string[3];
             byte[] imageData = null;
@@ -65,7 +70,7 @@ namespace SteamStore.WebUI.Controllers
                         }
                     }
                 }
-                _gameLogic.AddGame(addGameModel.Name, addGameModel.Price, gameimages[0], addGameModel.Description, addGameModel.Category, addGameModel.Producer, gameimages[1], gameimages[2]);
+                _gameLogic.AddGame(addGameModel.Name, addGameModel.Price, addGameModel.Discount, gameimages[0], addGameModel.Description, addGameModel.Category, addGameModel.Producer, gameimages[1], gameimages[2]);
                 return RedirectToAction("Catalog");
             }
             return View(addGameModel);
@@ -115,6 +120,72 @@ namespace SteamStore.WebUI.Controllers
             var searchSegment = JsonConvert.DeserializeObject<FindGameModel>(json);
 
             return Json(_gameLogic.GetGames().Where(x => x.Name.ToLower().Contains(searchSegment.Value)).ToList());
+        }
+
+        [HttpPost]
+        public ActionResult GamesFilter()
+        {
+            Stream req = Request.InputStream;
+            req.Seek(0, System.IO.SeekOrigin.Begin);
+            string json = new StreamReader(req).ReadToEnd();
+            var filterProps = JsonConvert.DeserializeObject<FilterGameModel>(json);
+
+            var jsonResult =  Json(_gameLogic.GetGames().Where(x => {
+                if (filterProps.Categories.Length == 0 && (filterProps.PriceTo == null || filterProps.PriceFrom == null))
+                {
+                    return true;
+                }
+
+                if (filterProps.Categories.Length != 0 && filterProps.PriceTo != null && filterProps.PriceFrom != null)
+                {
+                    return filterProps.Categories.Contains(x.CategoryId) && x.Price >= filterProps.PriceFrom && x.Price <= filterProps.PriceTo;
+                } else
+                {
+                    if (filterProps.PriceTo == null || filterProps.PriceFrom == null)
+                    {
+                        return filterProps.Categories.Contains(x.CategoryId);
+                    } else
+                    {
+                        return x.Price >= filterProps.PriceFrom && x.Price <= filterProps.PriceTo;
+                    }
+                }
+
+            }));
+
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpGet]
+        public ActionResult EditGame(int id)
+        {
+            _gameId = id;
+            SelectList categories = new SelectList(_gameLogic.GetCategories(), "CategoryId", "CategoryName");
+            ViewBag.Categories = categories;
+            var game = _gameLogic.GetGame(id);
+            var model = new EditGameModel()
+            {
+                Category = new Category() { CategoryId = game.CategoryId, CategoryName = game.Category },
+                Description = game.Description,
+                Name = game.Name,
+                Price = game.Price,
+                Producer = game.Producer
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditGame(EditGameModel model)
+        {
+            _gameLogic.EditGame(_gameId, model.Name, model.Category, model.Producer, model.Price, model.Discount, model.Description);
+            return RedirectToAction("GameProfile", new { id = _gameId});
+        }
+
+        [HttpGet]
+        public ActionResult RemoveGame(int id)
+        {
+            _gameLogic.RemoveGame(id);
+            return RedirectToAction("Catalog");
         }
     }
 }
