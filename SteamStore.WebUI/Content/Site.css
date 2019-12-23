@@ -426,6 +426,7 @@ footer .wrapper2 {
     font-size:20px;
     padding-top: 20px;
     margin: 0;
+    margin-bottom:30px;
 }
 /*Catalog*/
 .games-container.displayblock {
@@ -522,13 +523,14 @@ input[type="file"] {
     background-repeat: no-repeat;
     filter: brightness(0.7);
     background-size: cover;
-    background-attachment: fixed;
+    background-attachment: fixed !important; 
 }
 .background-img {
     width: 100vw;
     height: 600px;
     object-fit: cover;
     filter: brightness(0.7);
+    background-attachment: fixed !important;
 }
 .gameProfileItem {
     display: flex;
