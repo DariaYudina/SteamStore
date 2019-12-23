@@ -18,7 +18,7 @@ namespace SteamStore.WebUI.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(_gameLogic.GetGames().Take(5));
+            return View(_gameLogic.GetGames());
         }
        
         public ActionResult Test()

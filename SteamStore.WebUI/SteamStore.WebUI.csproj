@@ -163,6 +163,7 @@
     <Compile Include="Models\AddOrdersModel.cs" />
     <Compile Include="Models\CartItemModel.cs" />
     <Compile Include="Models\CookieItemModel.cs" />
+    <Compile Include="Models\FindGameModel.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\MyUserProvider.cs" />
     <Compile Include="Models\AddCommentModel.cs" />

@@ -11,5 +11,6 @@ namespace SteamStore.AbstractBLL
     {
         void AddFeedback(int userId, int gameId, string text, DateTime date);
         IEnumerable<Feedback> GetFeedbacks();
+        IEnumerable<Feedback> GetFeedbackByGameId(int gameId);
     }
 }

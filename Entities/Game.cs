@@ -20,7 +20,7 @@ namespace Entities
             Price = price;
             Image = image;
             Description = description;
-            Category = category;
+           // Category = category;
             Producer = producer;
             ProfileImage = profileImage;
             BackgroundImage = backgroundImage;
@@ -42,18 +42,18 @@ namespace Entities
 
         public string Description { get; set; }
 
-        public string Category
-        {
-            get => category;
-            set
-            {
-                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentNullException("Category", "Category must be neither null nor empty");
-                }
-                category = value;
-            }
-        }
+        //public string Category
+        //{
+        //    get => category;
+        //    set
+        //    {
+        //        if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
+        //        {
+        //            throw new ArgumentNullException("Category", "Category must be neither null nor empty");
+        //        }
+        //        category = value;
+        //    }
+        //}
         public decimal Price
         {
             get => price;
@@ -70,5 +70,8 @@ namespace Entities
         public string ProfileImage { get; set; }
         public string BackgroundImage { get; set; }
         public string Producer { get; set; }
+        public int CategoryId { get; set; }
+        public string Category { get; set; }
+        public int Discount { get; set; }
     }
 }

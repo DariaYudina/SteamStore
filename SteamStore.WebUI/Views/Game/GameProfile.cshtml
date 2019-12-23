@@ -46,7 +46,14 @@
                     </ul>
                 </div>
                 <div class="shopcontainer">
-                    <div class="price">@Model.Price.ToString("#.##") <span class="rub">руб.</span></div>
+                    @if (Model.Discount != 0)
+                    {
+                        <div class="price"><s>@Model.Price.ToString("#.##")</s> <span class="rub">руб.</span></div>
+                        <div class="price">@((Model.Price - (Model.Price / 100 * Model.Discount)).ToString("#.##")) <span class="rub">руб.</span></div>
+                    } else
+                    {
+                        <div class="price">@Model.Price.ToString("#.##") <span class="rub">руб.</span></div>
+                    }
                     <div class="buttoncontainer">
                         @Html.ActionLink("Купить", "OrderForm", "Order", new { @id = Model.GameId }, new { @class = "buy" })
 

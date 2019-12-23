@@ -11,5 +11,6 @@ namespace SteamStore.AbstractDAL
     {
         IEnumerable<Game> GetGames();
         void AddGame(Game game);
+        Category GetCategory(int id);
     }
 }

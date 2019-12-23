@@ -84,7 +84,12 @@ namespace SteamStore.WebUI.Controllers
         public ActionResult _GameCommentPartial(int id)
         {
             ViewBag.id = id;
-            return PartialView("_GameCommentPartial");
+            List<Feedback> model = _feedbackLogic.GetFeedbacks().Where(x => x.GameId == id).ToList();
+            foreach(var f in model)
+            {
+                f.User = _userBLL.GetUsers().FirstOrDefault(x => x.UserId == f.UserId);
+            }
+            return PartialView("_GameCommentPartial", model);
         }
 
         [HttpPost]
@@ -99,6 +104,17 @@ namespace SteamStore.WebUI.Controllers
             var userId = _userBLL.GetUsers().FirstOrDefault(u => u.Login == User.Identity.Name).UserId;
             _feedbackLogic.AddFeedback(userId, jsoncomment.gameid, jsoncomment.value, datetime);
             return Json(new { author = User.Identity.Name, date = datetime.ToString(), text = jsoncomment.value });
+        }
+
+        [HttpPost]
+        public ActionResult GameSearch()
+        {
+            Stream req = Request.InputStream;
+            req.Seek(0, System.IO.SeekOrigin.Begin);
+            string json = new StreamReader(req).ReadToEnd();
+            var searchSegment = JsonConvert.DeserializeObject<FindGameModel>(json);
+
+            return Json(_gameLogic.GetGames().Where(x => x.Name.ToLower().Contains(searchSegment.Value)).ToList());
         }
     }
 }

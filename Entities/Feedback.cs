@@ -16,14 +16,16 @@ namespace Entities
             Text = text;
             DateComment = date;
         }
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public int FeedbackId { get; set; }
 
+        [ForeignKey("User")]
         public int? UserId { get; set; }
+        [ForeignKey("Game")]
         public int? GameId { get; set; }
         public string Text { get; set; }
-        public virtual Game Game { get; set; }
-        public virtual User User { get; set; }
+        public Game Game { get; set; }
+        public User User { get; set; }
         public DateTime DateComment { get; set; }
     }
 }

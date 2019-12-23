@@ -17,5 +17,6 @@ namespace SteamStore.DAL.Concrete
         public DbSet<Game> Games { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

@@ -26,5 +26,10 @@ namespace SteamStore.BLL
         {
             return _feedBackDao.GetFeedBacks();
         }
+
+        public IEnumerable<Feedback> GetFeedbackByGameId(int gameId)
+        {
+            return _feedBackDao.GetFeedbackByGameId(gameId);
+        }
     }
 }

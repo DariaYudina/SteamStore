@@ -26,5 +26,13 @@ namespace SteamStore.DAL
                 return db.Games.ToList();
             }
         }
+
+        public Category GetCategory(int id)
+        {
+            using (var db = new EFDbContext())
+            {
+                return db.Categories.FirstOrDefault(x => x.CategoryId == id);
+            }
+        }
     }
 }

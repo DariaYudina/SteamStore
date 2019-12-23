@@ -20,8 +20,17 @@
                     <p>@item.Game.Category</p>
                 </div>
             </div>
+            <div class="price-container">
             <div class="catalog-price"><span>@item.Gamequantity шт.</span></div>
-            <div class="catalog-price"><span>@item.Game.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+                @if (item.Game.Discount != 0)
+                {
+                    <div class="catalog-price"><s>@item.Game.Price.ToString("#.##")</s><img src="~/Content/images/rub.png" alt="rub"></div>
+                    <div class="catalog-price"><span>@((item.Game.Price - (item.Game.Price / 100 * item.Game.Discount)).ToString("#.##"))</span><img src="~/Content/images/rub.png" alt="rub"></div>
+                } else
+                {
+                    <div class="catalog-price"><span>@item.Game.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+                }
+            </div>
         </a>
     }
 </div>

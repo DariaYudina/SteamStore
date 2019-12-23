@@ -14,12 +14,7 @@
 <div class="main-container main">
     <div class="catalog-container main">
         <h3>Популярные</h3>
-        @*<div class="game-sort main" id="game-sort-main">
-            <div class="game-sort-item">Новинки</div>
-            <div class="game-sort-item">Ожидаемые</div>
-        </div>*@
-
-            @foreach (var g in @Model)
+            @foreach (var g in @Model.Take(5))
             {
                 <a href="@Url.Action("GameProfile","Game", new { id = g.GameId})" class="catalog-item main">
                     <div class="catalog-img">
@@ -33,34 +28,45 @@
                             <span>@g.Category</span>
                         </div>
                     </div>
-                    <div class="catalog-price"><span>@g.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+                    <div class="price-container">
+                        @if (g.Discount != 0)
+                    {
+                        <div class="catalog-price"><s>@g.Price.ToString("#.##")</s><img src="~/Content/images/rub.png" alt="rub"></div>
+                        <div class="catalog-price"><span>@((g.Price - (g.Price / 100 * g.Discount)).ToString("#.##"))</span><img src="~/Content/images/rub.png" alt="rub"></div>
+                    }
+                    else
+                    {
+                        <div class="catalog-price"><span>@g.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+
+                    }
+                    </div>
                 </a>
             }
    
     </div>
     <div class="catalog-container main discount">
         <h3>Скидки</h3>
-        @*<div class="game-sort main">
-            <div class="game-sort-item">Новинки</div>
-            <div class="game-sort-item">Ожидаемые</div>
-        </div>*@
         @foreach (var g in @Model)
         {
-            <a href="@Url.Action("GameProfile","Game", new { id = g.GameId})" class="catalog-item main">
-                <div class="catalog-img">
-                    @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
-                    + g.Image + "\" />")
+        if (g.Discount != 0)
+        {
+        <a href="@Url.Action("GameProfile","Game", new { id = g.GameId})" class="catalog-item main">
+            <div class="catalog-img">
+                @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
+           + g.Image + "\" />")
+            </div>
+            <div class="catalog-name">
+                <span>@g.Name</span>
+                <div class="catalog-category">
+                    <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
+                    <span>@g.Category</span>
                 </div>
-                <div class="catalog-name">
-                    <span>@g.Name</span>
-                    <div class="catalog-category">
-                        <img src="~/Content/images/game-category.png" alt="gamecategory" class="gamecategory">
-                        <span>@g.Category</span>
-                    </div>
-                </div>
-                <div class="catalog-price"><span>@g.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
-            </a>
-        }
+            </div>
+            <div class="catalog-price"><s>@g.Price.ToString("#.##")</s><img src="~/Content/images/rub.png" alt="rub"></div>
+            <div class="catalog-price"><span>@((g.Price - (g.Price / 100 * g.Discount)).ToString("#.##"))</span><img src="~/Content/images/rub.png" alt="rub"></div>
+        </a>
+    }
+}
     </div>
 </div>
 <script>

@@ -17,7 +17,7 @@
             <a href="@Url.Action("GameProfile","Game", new { id = p.GameId})" class="catalog-item">
                 <div class="catalog-img">
                     @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
-                         + p.Image + "\" />")
+                              + p.Image + "\" />")
                 </div>
                 <div class="catalog-name">
                     <span class="game-title">@p.Name</span>
@@ -26,7 +26,17 @@
                         <p>@p.Category</p>
                     </div>
                 </div>
-                <div class="catalog-price"><span>@p.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+                <div class="price-container">
+                    @if (p.Discount != 0)
+                    {
+                        <div class="catalog-price"><s>@p.Price.ToString("#.##")</s><img src="~/Content/images/rub.png" alt="rub"></div>
+                        <div class="catalog-price"><span>@((p.Price - (p.Price / 100 * p.Discount)).ToString("#.##"))</span><img src="~/Content/images/rub.png" alt="rub"></div>
+                    }
+                    else
+                    {
+                        <div class="catalog-price"><span>@p.Price.ToString("#.##")</span><img src="~/Content/images/rub.png" alt="rub"></div>
+                    }
+                </div>
             </a>
         }
     </div>
@@ -36,7 +46,7 @@
             <a href="@Url.Action("GameProfile","Game", new { id = p.GameId})" class="catalog-item">
                 <div class="catalog-img">
                     @Html.Raw("<img class='gamesimg' src=\"data:image/jpeg;base64,"
-                         + p.Image + "\" />")
+                              + p.Image + "\" />")
                 </div>
                 <div class="catalog-name">
                     <span class="game-title">@p.Name</span>
@@ -53,9 +63,56 @@
     {
         <div class="buttoncontainer">
             <div class="addlinkbutton"> @Html.ActionLink("Добавить игру", "AddGame", "Game", null, new { @class = "addgamelink" })</div>
-
         </div>
     }
+</div>
+<div class="search-panel">
+    <div class="toggle-panel">
+        <span class="search-icon">
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </span>
+        <span class="toggle-text">Поиск</span>
+    </div>
+    <div style="position: absolute; top: 10px">
+        <div class="search-input">
+            <div>
+                <label for="search-segment">Поиск игры</label>
+                <input type="text" id="search-segment" name="search-segment" value="" />
+            </div>
+            <div class="addlinkbutton find-game-btn">Найти</div>
+        </div>
+    </div>
+    <div class="filters-panel">
+        <div style="margin-bottom: 20px">
+            <label class="custom-checkbox">
+                Экшены
+                <input type="checkbox">
+                <span class="chckmark"></span>
+            </label>
+            <label class="custom-checkbox">
+                Стратегии
+                <input type="checkbox" id="chk1">
+                <span class="chckmark"></span>
+            </label>
+            <label class="custom-checkbox">
+                RPG
+                <input type="checkbox">
+                <span class="chckmark"></span>
+            </label>
+        </div>
+        <b>Цена:</b>
+        <div class="price-value">
+            <div>
+                <label for="fromt">От</label>
+                <input type="number" id="from" name="from" value="" />
+            </div>
+            <div>
+                <label for="to">До</label>
+                <input type="number" id="to" name="to" value="" />
+            </div>
+        </div>
+        <div class="addlinkbutton find-game-btn" id="filter-btn">Отфильтровать</div>
+    </div>
 </div>
 <div class="btn-group pagination">
     @Html.PageLinks(Model.PageInfo, x => Url.Action("Catalog", "Game", new { page = x }))
@@ -68,7 +125,7 @@
     catalogItems[0].classList.add("active-tab");
     catalogItemsContainer.addEventListener("click", (e) => {
         if (e.target !== e.currentTarget) {
-            catalogItems.forEach( item => {
+            catalogItems.forEach(item => {
                 if (item.classList.contains('active-tab')) {
                     item.classList.remove("active-tab");
                 }
@@ -86,4 +143,61 @@
             }
         }
     });
+
+    let toggleButton = document.querySelector(".toggle-panel");
+    let searchPanel = document.querySelector(".search-panel");
+    toggleButton.addEventListener("click", () => {
+        if (searchPanel.classList.contains("open")) {
+            searchPanel.classList.remove("open");
+            searchPanel.style.left = "-250px";
+            document.querySelector(".search-icon").innerHTML = `<i class="fa fa-arrow-right" aria-hidden="true"></i>`
+        } else {
+            searchPanel.classList.add("open");
+            searchPanel.style.left = "0px";
+            document.querySelector(".search-icon").innerHTML = `<i class="fa fa-arrow-left" aria-hidden="true"></i>`
+        }
+    });
+
+    const findGameBtn = document.querySelector(".find-game-btn");
+    findGameBtn.addEventListener("click", (e) => {
+        const inputValue = document.querySelector("#search-segment");
+        e.preventDefault();
+        $.ajax({
+            url: `@Url.Action("GameSearch", "Game")`,
+            type: "POST",
+            data: JSON.stringify({ Value: inputValue.value }),
+            contentType: "application/json",
+            success: (data) => {
+                let resultString = '';
+                const gamesContainer = document.querySelector(".games-container");
+                for (let game of data) {
+                    resultString += `
+                        <a href=@Url.Action("GameProfile","Game")/${game.GameId} class="catalog-item">
+                <div class="catalog-img">
+                   <img class='gamesimg' src=\"data:image/jpeg;base64,${game.Image}\" />
+                </div>
+                <div class="catalog-name">
+                    <span class="game-title">${game.Name}</span>
+                    <div class="catalog-category">
+                        <img src="../../Content/images/game-category.png" alt="gamecategory" class="gamecategory">
+                        <p>${game.Category}</p>
+                    </div>
+                </div>
+                <div class="price-container">
+                    ${game.Discount != 0 ? `<div class="catalog-price"><s>${game.Price}</s><img src="~/Content/images/rub.png" alt="rub"></div>
+                        <div class="catalog-price"><span>${((game.Price - (game.Price / 100 * game.Discount)))}</span><img src="../../Content/images/rub.png" alt="rub"></div>`
+                        : `<div class="catalog-price"><span>${game.Price}</span><img src="../../Content/images/rub.png" alt="rub"></div>`}
+                </div>
+            </a>
+                    `
+                }
+                inputValue.value = '';
+                gamesContainer.innerHTML = resultString;
+            }
+        })
+    })
+    const filterBtn = document.querySelector("#filter-btn");
+    filterBtn.addEventListener("click", () => {
+        console.log(document.querySelector("#chk1").checked);
+    })
 </script>

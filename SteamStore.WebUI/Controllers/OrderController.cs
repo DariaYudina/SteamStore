@@ -56,7 +56,7 @@ namespace SteamStore.WebUI.Controllers
             var game = _gameLogic.GetGame(_gameId);
             if (ModelState.IsValid)
             {
-                addorderModel.OrderPrice = game.Price * addorderModel.OrderQuantity;
+                addorderModel.OrderPrice = (game.Price - (game.Price / 100 * game.Discount)) * addorderModel.OrderQuantity;
 
                 MailAddress from = new MailAddress("dashaudina06@gmail.com", "STEAM GAMES");
                 MailAddress to = new MailAddress(addorderModel.Email);
@@ -66,7 +66,7 @@ namespace SteamStore.WebUI.Controllers
                 {
                     itemscart += @"<tr>
                                 <td style =""padding: 10px; font-family: Play,Arial,sans-serif;"" >" + $"{game.Name}" + @"</td>
-                                <td style =""padding: 10px; font-family: Play,Arial,sans-serif;"" >" + $"{game.Price.ToString("#.##")}" + @" руб.</td>
+                                <td style =""padding: 10px; font-family: Play,Arial,sans-serif;"" >" + $"{(game.Price - (game.Price / 100 * game.Discount)).ToString("#.##")}" + @" руб.</td>
                                 <td style =""padding: 10px; font-family: Play,Arial,sans-serif; color: #0094e9;"" >" + $"{Guid.NewGuid().ToString()}" + @"</td>
                             </tr>";
                 }
@@ -134,11 +134,11 @@ namespace SteamStore.WebUI.Controllers
                     {
                         for (int j = 0; j < CartItems[i].Gamequantity; j++)
                         {
-                            addordersModel.OrderPrice += CartItems[i].Game.Price;
+                            addordersModel.OrderPrice += CartItems[i].Game.Price - (CartItems[i].Game.Price / 100 * CartItems[i].Game.Discount);
                             addordersModel.OrderQuantity++;
                             itemscart += @"<tr>
                                 <td style =""padding: 10px; font-family: Play,Arial,sans-serif;"" >" + $"{CartItems[i].Game.Name}" + @"</td>
-                                <td style =""padding: 10px; font-family: Play,Arial,sans-serif;"" >" + $"{CartItems[i].Game.Price.ToString("#.##")}" + @" руб.</td>
+                                <td style =""padding: 10px; font-family: Play,Arial,sans-serif;"" >" + $"{(CartItems[i].Game.Price - (CartItems[i].Game.Price / 100 * CartItems[i].Game.Discount)).ToString("#.##")}" + @" руб.</td>
                                 <td style =""padding: 10px; font-family: Play,Arial,sans-serif; color: #0094e9;"" >" + $"{Guid.NewGuid().ToString()}" + @"</td>
                             </tr>";
                         }

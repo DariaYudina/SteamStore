@@ -22,9 +22,19 @@ namespace SteamStore.DAL
 
         public IEnumerable<Feedback> GetFeedBacks()
         {
+            var feedBacks = new List<Feedback>();
             using (var db = new EFDbContext())
             {
-                return db.Feedbacks.ToList();
+                feedBacks = db.Feedbacks.ToList();
+            }
+            return feedBacks;
+        }
+
+        public IEnumerable<Feedback> GetFeedbackByGameId(int gameId)
+        {
+            using (var db = new EFDbContext())
+            {
+                return db.Feedbacks.Where(x => x.GameId == gameId).ToList();
             }
         }
     }

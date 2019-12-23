@@ -25,16 +25,27 @@ namespace SteamStore.BLL
 
         public IEnumerable<Game> GetGames()
         {
-           return _gameDao.GetGames();
+            var games = _gameDao.GetGames();
+            foreach(var game in games)
+            {
+                game.Category = _gameDao.GetCategory(game.CategoryId).CategoryName;
+            }
+           return games;
         }
         public Game GetGame(int id)
         {
-            return _gameDao.GetGames().FirstOrDefault(g => g.GameId == id);
+            var game = _gameDao.GetGames().FirstOrDefault(g => g.GameId == id);
+            game.Category = _gameDao.GetCategory(game.CategoryId).CategoryName;
+            return game;
         }
 
         public IEnumerable<Game> GetGames(int[] ids)
         {
             List<Game> games = _gameDao.GetGames().ToList();
+            foreach (var game in games)
+            {
+                game.Category = _gameDao.GetCategory(game.CategoryId).CategoryName;
+            }
             List<Game> foundGames = new List<Game>();
             foreach(int id in ids)
             {

@@ -11,5 +11,6 @@ namespace SteamStore.AbstractDAL
     {
         IEnumerable<Feedback> GetFeedBacks();
         void AddFeedback(Feedback feedBack);
+        IEnumerable<Feedback> GetFeedbackByGameId(int gameId);
     }
 }
