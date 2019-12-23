@@ -426,7 +426,7 @@ footer .wrapper2 {
     font-size:20px;
     padding-top: 20px;
     margin: 0;
-    margin-bottom:30px;
+   
 }
 /*Catalog*/
 .games-container.displayblock {
@@ -1126,4 +1126,16 @@ img{
 
 .price-value input {
     width: 50px;
+}
+.statist{
+    margin-top: 30px;
+    background-color: white;
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+.st{
+    font-weight: bold;
+    color: grey;
 }
