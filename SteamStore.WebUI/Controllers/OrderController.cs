@@ -219,11 +219,6 @@ namespace SteamStore.WebUI.Controllers
             {
                 User user = _userLogic.GetUsers().FirstOrDefault(u => u.Login == User.Identity.Name);
                 var orders = _orderLogic.GetOrders().Where(order => order.UserId == user.UserId).ToList();
-                foreach (var order in orders)
-                {
-                    Game game = _gameLogic.GetGame((int)order.GameId);
-                    order.Game = game;
-                }
                 return View(orders);
             }
             else

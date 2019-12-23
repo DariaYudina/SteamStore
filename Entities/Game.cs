@@ -42,18 +42,6 @@ namespace Entities
 
         public string Description { get; set; }
 
-        //public string Category
-        //{
-        //    get => category;
-        //    set
-        //    {
-        //        if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
-        //        {
-        //            throw new ArgumentNullException("Category", "Category must be neither null nor empty");
-        //        }
-        //        category = value;
-        //    }
-        //}
         public decimal Price
         {
             get => price;
