@@ -1,0 +1,21 @@
+﻿@using SteamStore.WebUI.Models;
+@model StatisticModel
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "My orders";
+}
+<div class="statist">
+    <h2 class="authheader">Статистика сайта</h2>
+    <p class="st">Общий доход сайта за всё время</p>
+    <p>@Model.AllIncome руб.</p>
+    <p class="st">Общее количество покупок игр за всё время</p>
+    <p>@Model.AllCount шт.</p>
+    <p class="st">Доход сайта в месяц</p>
+    <p>@Model.Monthlyincome руб.</p>
+    <p class="st">Общее количество покупок игр за месяц</p>
+    <p>@Model.MonthlyCount шт.</p>
+    @*<p>Самый популярный жанр игр</p>
+    <p>@Model.MostPopularGame.Category</p>
+    <p>Самыz популярная игра</p>
+    <p>@Model.MostPopularGame.Category</p>*@
+</div>

@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace SteamStore.WebUI.Controllers
 {
@@ -219,17 +220,49 @@ namespace SteamStore.WebUI.Controllers
             {
                 User user = _userLogic.GetUsers().FirstOrDefault(u => u.Login == User.Identity.Name);
                 var orders = _orderLogic.GetOrders().Where(order => order.UserId == user.UserId).ToList();
-                foreach (var order in orders)
-                {
-                    Game game = _gameLogic.GetGame((int)order.GameId);
-                    order.Game = game;
-                }
                 return View(orders);
             }
             else
             {
                 return HttpNotFound();
             }
+        }
+        [HttpGet]
+        public ActionResult Statistics()
+        {
+            if(User.Identity.IsAuthenticated && @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
+            {
+                StatisticModel statistic = new StatisticModel();
+                var orders = _orderLogic.GetOrders();
+                decimal allIncome = 0;
+                int allQuantity = 0;
+                foreach (var item in orders)
+                {
+                    allIncome += (decimal)item.OrderPrice;
+                    allQuantity += (int)item.OrderQuantity;
+                }
+
+                var ordersmounth = _orderLogic.GetOrders().Where(u => u.OrderDate.Value.Month >= DateTime.Now.Month);
+                decimal mounthIncome = 0;
+                int mounthQuantity = 0;
+                foreach (var item in orders)
+                {
+                    mounthIncome += (decimal)item.OrderPrice;
+                    mounthQuantity += (int)item.OrderQuantity;
+                }
+
+                statistic.AllIncome = allIncome;
+                statistic.AllCount = allQuantity;
+                statistic.Monthlyincome = mounthIncome;
+                statistic.MonthlyCount = mounthQuantity;
+
+                return View(statistic);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+            
         }
     }
 }

@@ -23,7 +23,7 @@ namespace SteamStore.DAL
         {
             using (var db = new EFDbContext())
             {
-                return db.Orders.ToList();
+                return db.Orders.Include("Game").Include("User").ToList();
             }
         }
     }

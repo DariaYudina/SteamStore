@@ -35,7 +35,7 @@
                         }
                         @if (User.Identity.IsAuthenticated && @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
                         {
-                            @Html.ActionLink("Статистика сайта", "MyOrders", "Order", null, new { @class = "active-small" })
+                            @Html.ActionLink("Статистика сайта", "Statistics", "Order", null, new { @class = "active-small" })
                         }
                     </div>
                     <div class="icon-wrapper">

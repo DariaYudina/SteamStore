@@ -170,6 +170,7 @@
     <Compile Include="Models\MyUserProvider.cs" />
     <Compile Include="Models\AddCommentModel.cs" />
     <Compile Include="Models\PageInfo.cs" />
+    <Compile Include="Models\StatisticModel.cs" />
     <Compile Include="Models\SigninModel.cs" />
     <Compile Include="Models\SignupModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,6 +207,7 @@
     <Content Include="Views\Game\_GameCommentPartial.cshtml" />
     <Content Include="Views\Game\GameSearch.cshtml" />
     <Content Include="Views\Game\EditGame.cshtml" />
+    <Content Include="Views\Order\Statistics.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
