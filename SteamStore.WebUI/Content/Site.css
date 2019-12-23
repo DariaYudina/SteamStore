@@ -1125,3 +1125,7 @@ img{
 .price-value input {
     width: 50px;
 }
+
+.controll-game {
+    display: flex;
+}

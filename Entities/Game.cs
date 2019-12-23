@@ -14,13 +14,15 @@ namespace Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Game(){ }
-        public Game(string name, decimal price, string image, string description, string category, string producer, string profileImage, string backgroundImage) : this()
+        public Game(string name, decimal price, decimal discount, string image, string description, Category category, string producer, string profileImage, string backgroundImage) : this()
         {
             Name = name;
             Price = price;
             Image = image;
             Description = description;
-           // Category = category;
+            Discount = discount;
+            CategoryId = category.CategoryId;
+            Category = category.CategoryName;
             Producer = producer;
             ProfileImage = profileImage;
             BackgroundImage = backgroundImage;
@@ -72,6 +74,6 @@ namespace Entities
         public string Producer { get; set; }
         public int CategoryId { get; set; }
         public string Category { get; set; }
-        public int Discount { get; set; }
+        public decimal Discount { get; set; }
     }
 }

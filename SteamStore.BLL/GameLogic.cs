@@ -17,9 +17,9 @@ namespace SteamStore.BLL
             _gameDao = gameDao;
         }
 
-        public void AddGame(string name, decimal price, string image, string description, string category, string producer, string profileImage, string backgroundImage)
+        public void AddGame(string name, decimal price, decimal discount, string image, string description, Category category, string producer, string profileImage, string backgroundImage)
         {
-            Game game = new Game(name, price, image, description, category, producer, profileImage, backgroundImage);
+            Game game = new Game(name, price, discount, image, description, category, producer, profileImage, backgroundImage);
             _gameDao.AddGame(game);
         }
 
@@ -53,6 +53,21 @@ namespace SteamStore.BLL
                 foundGames.Add(game);
             }
             return foundGames;
+        }
+
+        public IEnumerable<Category> GetCategories()
+        {
+            return _gameDao.GetCategories();
+        }
+
+        public void EditGame(int id, string name, Category category, string producer, decimal price, decimal discount, string description)
+        {
+            _gameDao.EditGame(id, name, category, producer, price, discount, description);
+        }
+
+        public void RemoveGame(int id)
+        {
+            _gameDao.RemoveGame(id);
         }
     }
 }

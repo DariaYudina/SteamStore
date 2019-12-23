@@ -1,0 +1,34 @@
+﻿@model SteamStore.WebUI.Models.EditGameModel
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit Game";
+}
+@if (User.Identity.IsAuthenticated && @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
+{
+    <h2 class="authheader">Редактирование игры</h2>
+    using (Html.BeginForm("EditGame", "Game", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "addgameform" }))
+    {
+
+        @Html.TextBox("Name", Model.Name, new { @placeholder = "Введите название", @class = "forminput" })
+        <div class="editor-field">
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        @Html.DropDownListFor(m => Model.Category.CategoryId, ViewBag.Categories as SelectList, new { @class = "forminput" })
+
+        @Html.TextBox("Producer", Model.Producer, new { @placeholder = "Введите производителя игры", @class = "forminput" })
+        <div class="editor-field">
+            @Html.ValidationMessageFor(model => model.Producer)
+        </div>
+
+        @Html.TextBoxFor(m => m.Price, new { @type = "number", @min = "0", @placeholder = "Введите цену", @class = "forminput", Value = Model.Price })
+        <div class="editor-field">
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+        @Html.TextBoxFor(m => m.Discount, new { @type = "number", @min = "0", @placeholder = "Введите скидку", @class = "forminput" })
+        <div class="editor-field">
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+        <textarea id="txtInput" name="Description" class="addgametextarea" placeholder="Введите описание игры...">@Model.Description</textarea>
+        <p><input type="submit" value="Сохранить изменения" class="addgamebutton" /></p>
+    }
+}

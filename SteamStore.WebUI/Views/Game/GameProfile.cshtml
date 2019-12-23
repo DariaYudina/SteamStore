@@ -73,6 +73,14 @@
                             </svg>
                         </a>
                     </div>
+                     @if (User.Identity.IsAuthenticated && @Roles.Provider.IsUserInRole(User.Identity.Name, "Admin"))
+                        {
+                    <div class="controll-game">
+                        @Html.ActionLink("Редактировать", "EditGame", "Game", new { @id = Model.GameId }, new { @class = "addlinkbutton find-game-btn" })
+                        @Html.ActionLink("Удалить", "RemoveGame", "Game", new { @id = Model.GameId }, new { @class = "addlinkbutton find-game-btn" })
+                    </div>
+                        }
+                    
                 </div>
             </div>
             <div class="gameprofile-right-item">
